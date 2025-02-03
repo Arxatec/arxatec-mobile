@@ -1,0 +1,77 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/DMSans-Black.ttf",
+      "sha1": "3d699dbcc47446a159276fce06c832c292103ea2"
+    },
+    {
+      "path": "assets/fonts/DMSans-BlackItalic.ttf",
+      "sha1": "29588c660d2bf6ded6a88a623e627d835876fce0"
+    },
+    {
+      "path": "assets/fonts/DMSans-Bold.ttf",
+      "sha1": "e2465f11006633e4e4ac7652b543adfa6f0c26cd"
+    },
+    {
+      "path": "assets/fonts/DMSans-BoldItalic.ttf",
+      "sha1": "53ae49b6413d1d7b796b89270049f9216feae4cc"
+    },
+    {
+      "path": "assets/fonts/DMSans-ExtraBold.ttf",
+      "sha1": "0fbdb613f00b0075941c4abd7b77db4373846bd4"
+    },
+    {
+      "path": "assets/fonts/DMSans-ExtraBoldItalic.ttf",
+      "sha1": "a80876cb169312cff7d884116377b51800d3162e"
+    },
+    {
+      "path": "assets/fonts/DMSans-ExtraLight.ttf",
+      "sha1": "2f604aa72c070e3eb047604e6af5156581697b33"
+    },
+    {
+      "path": "assets/fonts/DMSans-ExtraLightItalic.ttf",
+      "sha1": "67e55c0cdaa1f73c719d72c9c465982ca9a25db7"
+    },
+    {
+      "path": "assets/fonts/DMSans-Italic.ttf",
+      "sha1": "5d1ebff28aae53f9c6dc0ea15167d21b43d0e2cc"
+    },
+    {
+      "path": "assets/fonts/DMSans-Light.ttf",
+      "sha1": "cb88a02cd4f884780e8935485739a16ad46f10ad"
+    },
+    {
+      "path": "assets/fonts/DMSans-LightItalic.ttf",
+      "sha1": "283972c53adce588a70fae75feb1e2b9d808b5d2"
+    },
+    {
+      "path": "assets/fonts/DMSans-Medium.ttf",
+      "sha1": "65cb79753017741ff95b1ecd1689d56e96e2edbd"
+    },
+    {
+      "path": "assets/fonts/DMSans-MediumItalic.ttf",
+      "sha1": "38ffeb119f78c8299086157fd878adffa0ebc8b3"
+    },
+    {
+      "path": "assets/fonts/DMSans-Regular.ttf",
+      "sha1": "8599ebf95f6cd0694dfc3af43522b535fcbfba6d"
+    },
+    {
+      "path": "assets/fonts/DMSans-SemiBold.ttf",
+      "sha1": "fa1443d6c5de4532886f152c24840b1d1588a8bc"
+    },
+    {
+      "path": "assets/fonts/DMSans-SemiBoldItalic.ttf",
+      "sha1": "7e25f557228e2221cb43f5f891f6b241e0eb0828"
+    },
+    {
+      "path": "assets/fonts/DMSans-Thin.ttf",
+      "sha1": "5ace7c5ddad95820a7d9de5c04cd0f70783f38bc"
+    },
+    {
+      "path": "assets/fonts/DMSans-ThinItalic.ttf",
+      "sha1": "1c8fd424391ba56c2ce2c49607a8c225ee7b8901"
+    }
+  ]
+}

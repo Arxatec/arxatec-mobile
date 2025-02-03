@@ -1,6 +1,16 @@
-import React from 'react';
-import {Text} from 'react-native';
+import {Form} from '../components/organism';
+import {PageContainer} from '@/components/layout';
+import {Header} from '@/modules/auth/components/atoms';
 
 export default function Login() {
-  return <Text>Login page</Text>;
+  return (
+    <PageContainer>
+      <Header
+        title="Iniciar sesión"
+        text="Inicia sesión en tu cuenta para acceder a toda la información que
+            has guardado."
+      />
+      <Form />
+    </PageContainer>
+  );
 }
