@@ -23,14 +23,14 @@ const style = StyleSheet.create({
     marginTop: 15,
   },
   text: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: STYLES.fonts.regular,
     color: STYLES.colors.black[600],
     marginRight: 5,
   },
   buttonText: {
-    color: STYLES.colors.blue[500],
+    color: STYLES.colors.blue[600],
     fontFamily: STYLES.fonts.semi_bold,
-    fontSize: 12,
+    fontSize: 14,
   },
 });

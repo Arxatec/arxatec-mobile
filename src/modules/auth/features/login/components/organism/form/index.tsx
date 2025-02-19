@@ -8,6 +8,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 export const Form = () => {
   const {navigateTo} = useAppNavigation();
   const navigateToRegister = () => navigateTo(Routes.Register);
+  const navigateToForgotPassword = () => navigateTo(Routes.ForgotPassword);
   return (
     <View>
       <View style={style.containerForm}>
@@ -30,7 +31,7 @@ export const Form = () => {
       </View>
 
       <View style={{flex: 1, alignItems: 'flex-end', marginTop: 16}}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={navigateToForgotPassword}>
           <Text style={style.buttonLinkText}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
       </View>
@@ -63,9 +64,8 @@ const style = StyleSheet.create({
     marginTop: 32,
   },
   buttonLinkText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: STYLES.colors.blue[500],
+    fontSize: 14,
+    color: STYLES.colors.blue[600],
     fontFamily: STYLES.fonts.regular,
     textAlign: 'center',
   },

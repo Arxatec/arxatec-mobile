@@ -1,24 +1,31 @@
 import {STYLES} from '@/utils';
 import React from 'react';
 import {
+  StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
 
 interface PrimaryButtonProps extends TouchableOpacityProps {
-  title: string;
+  title?: string;
+  titleStyle?: StyleProp<TextStyle>;
+  children?: React.ReactNode;
 }
 
 export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   title,
   style,
+  titleStyle,
+  children,
   ...props
 }) => {
   return (
     <TouchableOpacity style={[styles.button, style]} {...props}>
-      <Text style={styles.buttonText}>{title}</Text>
+      {children}
+      {title && <Text style={[styles.buttonText, titleStyle]}>{title}</Text>}
     </TouchableOpacity>
   );
 };
@@ -26,13 +33,14 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    backgroundColor: STYLES.colors.blue[500],
+    backgroundColor: STYLES.colors.blue[600],
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderRadius: 5,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    columnGap: 10,
   },
 
   buttonText: {

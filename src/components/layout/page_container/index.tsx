@@ -7,17 +7,25 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const PageContainer: React.FC<Props> = ({children}) => {
+  const insets = useSafeAreaInsets();
   return (
     <SafeAreaView style={styles.containerPage}>
-      <StatusBar backgroundColor="transparent" translucent />
+      <StatusBar
+        backgroundColor="transparent"
+        translucent
+        barStyle="dark-content"
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>{children}</View>
+        <View style={[styles.container, {marginTop: insets.top + 16}]}>
+          {children}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -29,7 +37,6 @@ const styles = StyleSheet.create({
     backgroundColor: STYLES.colors.white[1],
   },
   container: {
-    paddingHorizontal: 16,
-    marginTop: 40,
+    paddingHorizontal: 32,
   },
 });

@@ -32,7 +32,7 @@ export const CustomInput: React.FC<Props> = ({
           secureTextEntry={isPassword && !showPassword}
           placeholderTextColor={STYLES.colors.black[400]}
           cursorColor={STYLES.colors.blue[500]}
-          selectionColor={STYLES.colors.blue[500]}
+          selectionColor={STYLES.colors.blue[100]}
           {...props}
         />
         {isPassword && (
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontFamily: STYLES.fonts.regular,
     borderWidth: 1,
     borderColor: STYLES.colors.black[200],
-    borderRadius: 5,
+    borderRadius: 10,
     paddingHorizontal: 16,
     paddingVertical: 10,
     marginTop: 8,

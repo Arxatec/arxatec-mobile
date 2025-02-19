@@ -1,29 +1,30 @@
 import {STYLES} from '@/utils';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import logo from '@/assets/logo.png';
+import {ArrowLeftIcon} from 'react-native-heroicons/outline';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface Props {
   title: string;
   text: string;
+  action: () => void;
 }
 
-export const Header: React.FC<Props> = ({title, text}) => {
+export const Header: React.FC<Props> = ({title, text, action}) => {
   return (
     <View>
-      <Image source={logo} style={style.logo} />
-      <Text style={style.title}>{title}</Text>
-      <Text style={style.text}>{text}</Text>
+      <TouchableOpacity style={styles.button} onPress={action}>
+        <ArrowLeftIcon
+          size={16}
+          color={STYLES.colors.black[900]}
+          strokeWidth={2}
+        />
+      </TouchableOpacity>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.text}>{text}</Text>
     </View>
   );
 };
 
-const style = StyleSheet.create({
-  logo: {
-    width: 50,
-    height: 50,
-    objectFit: 'contain',
-  },
-
+const styles = StyleSheet.create({
   title: {
     fontFamily: STYLES.fonts.bold,
     fontSize: 18,
@@ -37,5 +38,13 @@ const style = StyleSheet.create({
     fontFamily: STYLES.fonts.regular,
     fontSize: 14,
     color: STYLES.colors.black[600],
+  },
+  button: {
+    width: 32,
+    height: 32,
+    backgroundColor: STYLES.colors.black[100],
+    borderRadius: 255,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
