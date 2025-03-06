@@ -10,10 +10,8 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function Introduction() {
-  const insets = useSafeAreaInsets();
   const {navigateTo} = useAppNavigation();
   const navigateToAuthOptions = () => navigateTo(Routes.AuthOptions);
   return (
@@ -23,7 +21,7 @@ export default function Introduction() {
         translucent
         barStyle="dark-content"
       />
-      <View style={[styles.imageContainer, {marginTop: insets.top}]}>
+      <View style={[styles.imageContainer]}>
         <Image
           style={styles.image}
           source={{
@@ -31,29 +29,33 @@ export default function Introduction() {
           }}></Image>
       </View>
       <View style={styles.container}>
-        <Text style={styles.title}>
-          Conecta clientes y abogados en un solo lugar
-        </Text>
-        <Text style={styles.text}>
-          Maneja tus casos con eficiencia, accede a asesoría legal al instante y
-          forma parte de una comunidad activa para compartir conocimientos.
-        </Text>
-        <PrimaryButton
-          onPress={navigateToAuthOptions}
-          title="Empezar ahora"
-          style={styles.button}
-        />
-        <Text style={styles.disclaimerText}>
-          Al continuar, aceptas nuestros{' '}
-          <Text onPress={() => {}} style={styles.disclamerTextLink}>
-            términos y condiciones
-          </Text>{' '}
-          y nuestra{' '}
-          <Text onPress={() => {}} style={styles.disclamerTextLink}>
-            política de privacidad
+        <View>
+          <Text style={styles.title}>
+            Conecta clientes y abogados en un solo lugar
           </Text>
-          .
-        </Text>
+          <Text style={styles.text}>
+            Maneja tus casos con eficiencia, accede a asesoría legal al instante
+            y forma parte de una comunidad activa para compartir conocimientos.
+          </Text>
+        </View>
+        <View>
+          <PrimaryButton
+            onPress={navigateToAuthOptions}
+            title="Empezar ahora"
+            style={styles.button}
+          />
+          <Text style={styles.disclaimerText}>
+            Al continuar, aceptas nuestros{' '}
+            <Text onPress={() => {}} style={styles.disclamerTextLink}>
+              términos y condiciones
+            </Text>{' '}
+            y nuestra{' '}
+            <Text onPress={() => {}} style={styles.disclamerTextLink}>
+              política de privacidad
+            </Text>
+            .
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -62,6 +64,7 @@ export default function Introduction() {
 const styles = StyleSheet.create({
   containerPage: {
     flex: 1,
+    backgroundColor: STYLES.colors.white[1],
   },
   container: {
     flex: 4,
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
     color: STYLES.colors.black[700],
   },
   button: {
-    marginTop: 24,
+    marginTop: 32,
   },
   disclaimerText: {
     fontSize: 12,
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     fontFamily: STYLES.fonts.regular,
-    marginTop: 24,
+    marginTop: 10,
   },
   disclamerTextLink: {
     fontFamily: STYLES.fonts.semi_bold,
