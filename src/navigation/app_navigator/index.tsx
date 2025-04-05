@@ -7,6 +7,7 @@ import Register from '@/modules/auth/features/register/pages/register';
 import AuthOptions from '@/modules/auth/features/auth_options/pages/auth_options';
 import ForgotPassword from '@/modules/auth/features/forgot_password/pages/forgot_password';
 import Introduction from '@/modules/introduction/features/introduction/pages/introduction';
+import TabNavigator from '../tab_navigator';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -28,6 +29,7 @@ export default function AppNavigator() {
         <Stack.Screen name={Routes.Register} component={Register} />
         <Stack.Screen name={Routes.ForgotPassword} component={ForgotPassword} />
         <Stack.Screen name={Routes.Introduction} component={Introduction} />
+        <Stack.Screen name={Routes.Tabs} component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

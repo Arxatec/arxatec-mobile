@@ -10,9 +10,13 @@ import {
 
 interface Props {
   children: React.ReactNode;
+  paddingHorizontal?: number;
 }
 
-export const PageContainer: React.FC<Props> = ({children}) => {
+export const PageContainer: React.FC<Props> = ({
+  children,
+  paddingHorizontal = 32,
+}) => {
   return (
     <SafeAreaView style={styles.containerPage}>
       <StatusBar
@@ -21,7 +25,9 @@ export const PageContainer: React.FC<Props> = ({children}) => {
         barStyle="dark-content"
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={[styles.container, {marginTop: 16}]}>{children}</View>
+        <View style={{marginTop: 16, paddingHorizontal: paddingHorizontal}}>
+          {children}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -31,8 +37,5 @@ const styles = StyleSheet.create({
   containerPage: {
     flex: 1,
     backgroundColor: STYLES.colors.white[1],
-  },
-  container: {
-    paddingHorizontal: 32,
   },
 });

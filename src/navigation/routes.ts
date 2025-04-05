@@ -4,14 +4,22 @@ export enum Routes {
   Login = 'Login',
   AuthOptions = 'AuthOptions',
   ForgotPassword = 'ForgotPassword',
+  Tabs = 'Tabs',
+}
+
+export enum RoutesTabs {
   Home = 'Home',
+  Messages = 'Messages',
+  Posts = 'Posts',
+  Cases = 'Cases',
+  Calendar = 'Calendar',
 }
 
 export type RootStackParamList = {
   [Routes.Introduction]: undefined;
-  [Routes.Home]: undefined;
   [Routes.Register]: undefined;
   [Routes.AuthOptions]: undefined;
   [Routes.ForgotPassword]: undefined;
   [Routes.Login]: undefined;
+  [Routes.Tabs]: undefined;
 };

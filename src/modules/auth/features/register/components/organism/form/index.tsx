@@ -56,7 +56,7 @@ export const Form = () => {
       </View>
 
       <View style={style.buttonSeparator}>
-        <PrimaryButton title="Ingresar" />
+        <PrimaryButton title="Registrarse" />
       </View>
 
       <AccountInquiry

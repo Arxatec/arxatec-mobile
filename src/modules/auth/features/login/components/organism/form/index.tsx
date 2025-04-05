@@ -8,6 +8,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 export const Form = () => {
   const {navigateTo} = useAppNavigation();
   const navigateToRegister = () => navigateTo(Routes.Register);
+  const navigateToTabs = () => navigateTo(Routes.Tabs);
   const navigateToForgotPassword = () => navigateTo(Routes.ForgotPassword);
   return (
     <View>
@@ -37,7 +38,7 @@ export const Form = () => {
       </View>
 
       <View style={style.buttonSeparator}>
-        <PrimaryButton title="Ingresar" />
+        <PrimaryButton title="Ingresar" onPress={navigateToTabs} />
       </View>
 
       <AccountInquiry
