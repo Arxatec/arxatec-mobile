@@ -1,7 +1,8 @@
 import {PageContainer} from '@/components/layout';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {ShortPost} from '../components/molecules/short_post';
 import {STYLES} from '@/utils';
+import Share from 'react-native-share';
 
 export default function ViewPosts() {
   const postsData = [
@@ -10,74 +11,209 @@ export default function ViewPosts() {
       username: 'Carlos Mendoza',
       avatarUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
       timestamp: 'hace 2 horas',
-      title: 'Consejos para enfrentar situaciones difíciles',
+      title: '¿Qué hacer si te despiden injustamente?',
       content:
-        'Cuando nos enfrentamos a momentos complicados, es importante mantener la calma y buscar apoyo. No dudes en compartir tus experiencias en la plataforma.',
-      likesCount: 45,
-      commentsCount: 12,
+        'Si consideras que tu despido fue arbitrario, es importante revisar tu contrato y contactar a un abogado laboral. Puedes tener derecho a una indemnización.',
+      likesCount: 52,
+      commentsCount: 10,
     },
     {
       id: '2',
       username: 'María González',
       avatarUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
-      timestamp: 'hace 5 horas',
-      title: 'Mi experiencia de superación',
+      timestamp: 'hace 3 horas',
+      title: 'Cómo registrar una marca en Perú',
       content:
-        'Quiero compartir con todos ustedes cómo logré superar una situación muy difícil. Espero que mi historia pueda ayudar a otros que estén pasando por lo mismo.',
-      likesCount: 89,
-      commentsCount: 24,
+        'Si tienes un emprendimiento, protege tu marca. Aquí te explico paso a paso cómo hacerlo mediante Indecopi.',
+      likesCount: 78,
+      commentsCount: 19,
     },
     {
       id: '3',
       username: 'Alejandro Torres',
       avatarUrl: 'https://randomuser.me/api/portraits/men/67.jpg',
-      timestamp: 'ayer',
-      title: 'Recursos comunitarios disponibles',
+      timestamp: 'hace 5 horas',
+      title: 'Derechos del inquilino frente al desalojo',
       content:
-        'He recopilado una lista de recursos disponibles en nuestra comunidad para quienes necesiten apoyo legal y psicológico. No duden en comentar si conocen otros.',
-      likesCount: 56,
-      commentsCount: 8,
+        'Muchos arrendadores desconocen los procesos legales. Si te quieren desalojar sin orden judicial, eso es ilegal.',
+      likesCount: 66,
+      commentsCount: 13,
     },
     {
       id: '4',
       username: 'Laura Ramírez',
-      // URL intencionalmente incorrecta para mostrar las iniciales
       avatarUrl: 'https://imagen-que-no-existe.jpg',
-      timestamp: 'hace 2 días',
-      title: 'Grupos de apoyo virtual',
+      timestamp: 'ayer',
+      title: 'Diferencias entre conciliación y juicio',
       content:
-        'Les comparto información sobre grupos de apoyo virtuales que se reúnen semanalmente. Han sido de gran ayuda para muchas personas durante estos tiempos difíciles.',
-      likesCount: 34,
-      commentsCount: 15,
+        'La conciliación puede ser una vía rápida y económica para resolver conflictos legales. Conoce cuándo es mejor usarla.',
+      likesCount: 39,
+      commentsCount: 6,
+    },
+    {
+      id: '5',
+      username: 'Eduardo Salazar',
+      avatarUrl: 'https://randomuser.me/api/portraits/men/23.jpg',
+      timestamp: 'ayer',
+      title: '¿Qué es una demanda de alimentos?',
+      content:
+        'Si uno de los padres no cumple con sus obligaciones, puedes iniciar una demanda para garantizar el sustento del menor.',
+      likesCount: 91,
+      commentsCount: 21,
+    },
+    {
+      id: '6',
+      username: 'Paola Villanueva',
+      avatarUrl: 'https://randomuser.me/api/portraits/women/28.jpg',
+      timestamp: 'hace 2 días',
+      title: 'Consejos para denunciar violencia familiar',
+      content:
+        'No estás sola. Existen canales legales y líneas de ayuda para denunciar violencia familiar. Aquí los principales pasos.',
+      likesCount: 102,
+      commentsCount: 33,
+    },
+    {
+      id: '7',
+      username: 'Miguel Campos',
+      avatarUrl: 'https://randomuser.me/api/portraits/men/45.jpg',
+      timestamp: 'hace 2 días',
+      title: 'Herencias: qué hacer si no hay testamento',
+      content:
+        'En caso de fallecimiento sin testamento, entra en juego la sucesión intestada. Te explico cómo se reparte la herencia.',
+      likesCount: 61,
+      commentsCount: 9,
+    },
+    {
+      id: '8',
+      username: 'Lucía Espinoza',
+      avatarUrl: 'https://randomuser.me/api/portraits/women/19.jpg',
+      timestamp: 'hace 3 días',
+      title: 'Proceso para registrar una empresa',
+      content:
+        'Desde la minuta hasta la Sunat. Esta es la guía legal para formalizar tu negocio en Perú.',
+      likesCount: 84,
+      commentsCount: 17,
+    },
+    {
+      id: '9',
+      username: 'Renato Gamarra',
+      avatarUrl: 'https://randomuser.me/api/portraits/men/50.jpg',
+      timestamp: 'hace 4 días',
+      title: '¿Puedo grabar conversaciones como prueba?',
+      content:
+        'En algunos casos sí, pero depende del contexto. Aquí explico cuándo es legal usar grabaciones como evidencia.',
+      likesCount: 73,
+      commentsCount: 11,
+    },
+    {
+      id: '10',
+      username: 'Valeria Rojas',
+      avatarUrl: 'https://randomuser.me/api/portraits/women/33.jpg',
+      timestamp: 'hace 4 días',
+      title: '¿Qué pasa si firmé un contrato sin leer?',
+      content:
+        'La ley presume que lo conoces. Siempre consulta a un abogado antes de firmar cualquier contrato.',
+      likesCount: 44,
+      commentsCount: 5,
+    },
+    {
+      id: '11',
+      username: 'Andrés León',
+      avatarUrl: 'https://randomuser.me/api/portraits/men/61.jpg',
+      timestamp: 'hace 5 días',
+      title: 'Diferencia entre denuncia y querella',
+      content:
+        'Ambos son mecanismos legales, pero tienen procesos distintos. Aquí te explico cuál usar según tu caso.',
+      likesCount: 58,
+      commentsCount: 8,
+    },
+    {
+      id: '12',
+      username: 'Diana Ruiz',
+      avatarUrl: 'https://randomuser.me/api/portraits/women/12.jpg',
+      timestamp: 'hace 5 días',
+      title: '¿Qué hacer si recibes una demanda?',
+      content:
+        'No ignores una demanda. Tienes plazos para responder. Aquí te explico los primeros pasos.',
+      likesCount: 69,
+      commentsCount: 14,
+    },
+    {
+      id: '13',
+      username: 'Jorge Cabrera',
+      avatarUrl: 'https://randomuser.me/api/portraits/men/72.jpg',
+      timestamp: 'hace 6 días',
+      title: 'El rol del abogado en una conciliación',
+      content:
+        'Tu abogado puede ayudarte a negociar condiciones favorables antes de llegar a juicio.',
+      likesCount: 36,
+      commentsCount: 4,
+    },
+    {
+      id: '14',
+      username: 'Sofía Delgado',
+      avatarUrl: 'https://randomuser.me/api/portraits/women/47.jpg',
+      timestamp: 'hace 1 semana',
+      title: '¿Qué es el habeas corpus?',
+      content:
+        'Es un mecanismo constitucional para proteger tu libertad personal frente a detenciones arbitrarias.',
+      likesCount: 88,
+      commentsCount: 20,
+    },
+    {
+      id: '15',
+      username: 'Gabriel Ortega',
+      avatarUrl: 'https://randomuser.me/api/portraits/men/38.jpg',
+      timestamp: 'hace 1 semana',
+      title: 'Diferencias entre contrato civil y comercial',
+      content:
+        'Ambos regulan acuerdos, pero tienen implicancias legales distintas. Aquí una comparación práctica.',
+      likesCount: 48,
+      commentsCount: 7,
     },
   ];
 
-  // Manejadores de eventos
   const handleLike = (postId: string) => {
     console.log(`Post ${postId} liked`);
-    // Aquí irías tu lógica para dar like a un post
   };
 
   const handleComment = (postId: string) => {
     console.log(`Commenting on post ${postId}`);
-    // Aquí iría tu lógica para mostrar o añadir comentarios
   };
 
+  const share = async () => {
+    try {
+      const result = await Share.open({
+        title: 'Compartir algo',
+        message: 'Esto es un mensaje para compartir',
+        url: 'https://example.com',
+      });
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleShare = (postId: string) => {
     console.log(`Sharing post ${postId}`);
-    // Aquí iría tu lógica para compartir un post
+    share();
   };
 
   const handleOptionSelected = (postId: string, option: string) => {
     console.log(`Option ${option} selected for post ${postId}`);
-    // Aquí manejarías las opciones como guardar, ocultar, etc.
   };
   return (
-    <PageContainer paddingHorizontal={16}>
+    <PageContainer
+      statusBarBackground={STYLES.colors.white[1]}
+      translucent={false}
+      scrollEnabled={false}>
       <View style={styles.header}>
         <Text style={styles.title}>Publicaciones</Text>
       </View>
-      <View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{
+          borderRadius: 10,
+        }}>
         {postsData.map(post => (
           <ShortPost
             key={post.id}
@@ -94,7 +230,7 @@ export default function ViewPosts() {
             onOptionSelected={option => handleOptionSelected(post.id, option)}
           />
         ))}
-      </View>
+      </ScrollView>
     </PageContainer>
   );
 }
@@ -102,7 +238,6 @@ export default function ViewPosts() {
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
     fontFamily: STYLES.fonts.bold,
     color: STYLES.colors.black[800],
   },
@@ -110,7 +245,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 4,
     backgroundColor: '#FFF',
     borderRadius: 10,
     padding: 10,

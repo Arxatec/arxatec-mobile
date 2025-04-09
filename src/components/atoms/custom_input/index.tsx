@@ -1,22 +1,26 @@
-import {STYLES} from '@/utils';
-import React, {useState} from 'react';
+import React, {useState, ReactNode} from 'react';
 import {
   StyleSheet,
   Text,
   TextInput,
-  TextInputProps,
-  TouchableOpacity,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import {EyeIcon, EyeSlashIcon} from 'react-native-heroicons/solid';
+import {STYLES} from '@/utils';
 
-interface Props extends TextInputProps {
-  label: string;
+interface Props extends React.ComponentProps<typeof TextInput> {
+  label?: string;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
+  style?: object;
   isPassword?: boolean;
 }
 
 export const CustomInput: React.FC<Props> = ({
   label,
+  startAdornment,
+  endAdornment,
   isPassword = false,
   style,
   ...props
@@ -24,17 +28,22 @@ export const CustomInput: React.FC<Props> = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       {label && <Text style={styles.labelInput}>{label}</Text>}
-      <View style={{position: 'relative'}}>
+      <View style={[styles.container, style]}>
+        {startAdornment && (
+          <View style={styles.startAdornment}>{startAdornment}</View>
+        )}
+
         <TextInput
-          style={[styles.input, style]}
+          style={[styles.input]}
           secureTextEntry={isPassword && !showPassword}
           placeholderTextColor={STYLES.colors.black[400]}
           cursorColor={STYLES.colors.blue[500]}
           selectionColor={STYLES.colors.blue[100]}
           {...props}
         />
+
         {isPassword && (
           <TouchableOpacity
             style={styles.showPassword}
@@ -46,6 +55,10 @@ export const CustomInput: React.FC<Props> = ({
             )}
           </TouchableOpacity>
         )}
+
+        {endAdornment && (
+          <View style={styles.endAdornment}>{endAdornment}</View>
+        )}
       </View>
     </View>
   );
@@ -56,29 +69,40 @@ const styles = StyleSheet.create({
     color: STYLES.colors.black[600],
     fontFamily: STYLES.fonts.medium,
     fontSize: 14,
+    marginBottom: 8,
   },
-  input: {
-    zIndex: 5,
-    fontFamily: STYLES.fonts.regular,
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: STYLES.colors.black[200],
     borderRadius: 10,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    marginTop: 8,
-    color: STYLES.colors.black[950],
-    backgroundColor: STYLES.colors.white[1],
-    fontSize: 14,
+    backgroundColor: '#FFF',
   },
-  showPassword: {
+  input: {
+    fontFamily: STYLES.fonts.regular,
+    fontSize: 14,
+    color: STYLES.colors.black[950],
+    paddingHorizontal: 16,
+    flex: 1,
+  },
+  startAdornment: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    paddingRight: 0,
+    paddingLeft: 16,
+  },
+  endAdornment: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 16,
+    paddingLeft: 0,
+  },
+  showPassword: {
     position: 'absolute',
     right: 16,
-    top: 6,
-    bottom: 0,
-    marginVertical: 'auto',
-    zIndex: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
   },
 });

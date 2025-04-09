@@ -17,8 +17,8 @@ export default function Introduction() {
   return (
     <SafeAreaView style={styles.containerPage}>
       <StatusBar
-        backgroundColor="transparent"
-        translucent
+        backgroundColor={STYLES.colors.white[1]}
+        translucent={false}
         barStyle="dark-content"
       />
       <View style={[styles.imageContainer]}>
@@ -67,15 +67,13 @@ const styles = StyleSheet.create({
     backgroundColor: STYLES.colors.white[1],
   },
   container: {
-    flex: 4,
+    flex: 3,
     paddingHorizontal: 32,
-    paddingVertical: 24,
     justifyContent: 'center',
-    backgroundColor: STYLES.colors.white[1],
   },
   imageContainer: {
     flex: 6,
-    paddingHorizontal: 32,
+    paddingHorizontal: 16,
     backgroundColor: STYLES.colors.white[1],
   },
   image: {

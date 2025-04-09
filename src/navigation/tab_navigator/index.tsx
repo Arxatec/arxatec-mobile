@@ -6,24 +6,18 @@ import {
   HomeIcon,
   ArchiveBoxIcon,
   UsersIcon,
-  CalendarIcon,
+  CalendarDaysIcon,
   ChatBubbleBottomCenterIcon,
 } from 'react-native-heroicons/solid';
-import {
-  HomeIcon as HomeIconInactive,
-  UsersIcon as UsersIconInactive,
-  ArchiveBoxIcon as ArchiveBoxIconInactive,
-  CalendarIcon as CalendarIconInactive,
-  ChatBubbleBottomCenterIcon as ChatBubbleBottomCenterIconInactive,
-} from 'react-native-heroicons/outline';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import {RoutesTabs} from '../routes';
-import ViewPosts from '@/modules/posts/features/view_posts/pages/view_posts';
 import ViewCases from '@/modules/cases/features/view_cases/pages/view_cases';
 import Calendar from '@/modules/calendar/features/calendar/pages/calendar';
-import Messages from '@/modules/messages/features/messages/pages/messages';
-import Home from '@/modules/home/features/home/pages/home';
+import MessageNavigator from '../message_navigator';
+import CommunityNavigator from '../community_navigator';
+import HomeNavigator from '../home_navigator';
+import {STYLES} from '@/utils';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,48 +31,43 @@ type TabParamList = {
 const Tabs = [
   {
     name: RoutesTabs.Home,
-    component: Home,
+    component: HomeNavigator,
     iconActive: HomeIcon,
-    iconInactive: HomeIconInactive,
-    label: 'Dashboard',
+    label: 'Inicio',
   },
   {
     name: RoutesTabs.Cases,
     component: ViewCases,
     iconActive: ArchiveBoxIcon,
-    iconInactive: ArchiveBoxIconInactive,
     label: 'Casos',
   },
   {
     name: RoutesTabs.Calendar,
     component: Calendar,
-    iconActive: CalendarIcon,
-    iconInactive: CalendarIconInactive,
+    iconActive: CalendarDaysIcon,
     label: 'Calendario',
   },
   {
-    name: RoutesTabs.Posts,
-    component: ViewPosts,
+    name: RoutesTabs.Community,
+    component: CommunityNavigator,
     iconActive: UsersIcon,
-    iconInactive: UsersIconInactive,
-    label: 'Publicaciones',
+    label: 'Comunidad',
   },
   {
     name: RoutesTabs.Messages,
-    component: Messages,
+    component: MessageNavigator,
     iconActive: ChatBubbleBottomCenterIcon,
-    iconInactive: ChatBubbleBottomCenterIconInactive,
     label: 'Mensajes',
   },
 ];
 
 const screenOptions: BottomTabNavigationOptions = {
   tabBarStyle: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: STYLES.colors.white[1],
     borderWidth: 0,
-    borderColor: '#f8fafc',
+    borderColor: STYLES.colors.white[1],
     elevation: 0,
-    height: 80,
+    height: 70,
   },
 };
 const tabOptions: BottomTabNavigationOptions = {
@@ -110,7 +99,7 @@ export default function TabNavigator() {
       screenOptions={{
         ...screenOptions,
         tabBarItemStyle: {
-          paddingVertical: 18,
+          paddingVertical: 10,
         },
       }}>
       {Tabs.map((tab, idx) => (
@@ -120,21 +109,25 @@ export default function TabNavigator() {
           component={tab.component}
           options={{
             ...tabOptions,
-            tabBarLabel: `${tab.label}`,
+            tabBarShowLabel: true,
             tabBarIcon: ({size}) => {
               return tabActive === idx ? (
-                <tab.iconActive color="#2563eb" size={size} />
+                <tab.iconActive color={STYLES.colors.blue[600]} size={22} />
               ) : (
-                <tab.iconInactive color="#6b7280" size={size} />
+                <tab.iconActive color={STYLES.colors.black[500]} size={22} />
               );
             },
+            tabBarLabel: tab.label,
             tabBarLabelStyle: {
-              color: tabActive === idx ? '#2563eb' : '#6b7280',
-              fontSize: 12,
-              letterSpacing: -0.4,
               fontFamily:
-                tabActive === idx ? 'Lexend-SemiBold' : 'Lexend-Regular',
+                tabActive === idx ? STYLES.fonts.bold : STYLES.fonts.medium,
+              fontSize: 12,
+              color:
+                tabActive === idx
+                  ? STYLES.colors.blue[600]
+                  : STYLES.colors.black[500],
             },
+            tabBarActiveTintColor: STYLES.colors.blue[600],
           }}
         />
       ))}

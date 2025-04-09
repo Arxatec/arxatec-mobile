@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Image,
   Text,
   StyleSheet,
-  ActivityIndicator,
   ImageErrorEventData,
   NativeSyntheticEvent,
+  Animated,
 } from 'react-native';
 import {STYLES} from '@/utils';
 
@@ -25,11 +25,35 @@ export const CustomAvatar: React.FC<Props> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const shimmerValue = useState(new Animated.Value(0))[0];
 
   const handleImageLoad = () => setIsLoading(false);
   const handleImageError = (e: NativeSyntheticEvent<ImageErrorEventData>) => {
     setIsLoading(false);
     setHasError(true);
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      startShimmerAnimation();
+    }
+  }, [isLoading]);
+
+  const startShimmerAnimation = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(shimmerValue, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+        Animated.timing(shimmerValue, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+      ]),
+    ).start();
   };
 
   const getColorFromUsername = (username: string) => {
@@ -51,20 +75,25 @@ export const CustomAvatar: React.FC<Props> = ({
   const avatarColor = getColorFromUsername(username);
   const initials = username.charAt(0).toUpperCase();
 
+  const interpolatedBackground = shimmerValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [STYLES.colors.black[200], STYLES.colors.black[100]],
+  });
+
   return (
     <View style={{width: size, height: size, position: 'relative'}}>
       {isLoading && (
-        <View
+        <Animated.View
           style={[
             styles.loadingContainer,
             {
               width: size,
               height: size,
               borderRadius: size / 2,
+              backgroundColor: interpolatedBackground,
             },
-          ]}>
-          <ActivityIndicator size="small" color={STYLES.colors.blue[500]} />
-        </View>
+          ]}
+        />
       )}
 
       {hasError ? (
@@ -109,7 +138,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: STYLES.colors.black[200],
   },
   initialsContainer: {
     justifyContent: 'center',

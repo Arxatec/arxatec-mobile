@@ -10,9 +10,26 @@ export enum Routes {
 export enum RoutesTabs {
   Home = 'Home',
   Messages = 'Messages',
-  Posts = 'Posts',
+  Community = 'Community',
   Cases = 'Cases',
   Calendar = 'Calendar',
+}
+
+export enum Messages {
+  ViewChats = 'ViewChats',
+  ViewChat = 'ViewChat',
+}
+
+export enum Community {
+  ViewPosts = 'ViewPosts',
+  ViewPost = 'ViewPost',
+  CreatePost = 'CreatePost',
+}
+
+export enum Home {
+  Dashboard = 'Dashboard',
+  Settings = 'Settings',
+  Notification = 'Notification',
 }
 
 export type RootStackParamList = {

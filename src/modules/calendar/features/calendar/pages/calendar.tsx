@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, SafeAreaView, StatusBar} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 import moment from 'moment';
 import 'moment/locale/es';
 
@@ -8,6 +14,7 @@ import {Event} from '../types';
 import {generateEvents} from '../utils/eventUtils';
 import {CalendarHeader} from '../components/molecules';
 import {DaysSwiper, WeekSelector} from '../components/organisms';
+import {PlusIcon} from 'react-native-heroicons/outline';
 
 // Datos de eventos
 const eventsData: Event[] = generateEvents();
@@ -65,9 +72,9 @@ export default function Calendar() {
   return (
     <SafeAreaView style={styles.containerPage}>
       <StatusBar
-        backgroundColor="transparent"
-        translucent
+        backgroundColor={STYLES.colors.white[1]}
         barStyle="dark-content"
+        translucent={false}
       />
       <View style={styles.container}>
         <CalendarHeader />
@@ -91,6 +98,10 @@ export default function Calendar() {
           getEventsForDay={getEventsForDay}
         />
       </View>
+
+      <TouchableOpacity style={styles.floatingButton}>
+        <PlusIcon size={20} color="#FFF"></PlusIcon>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -102,5 +113,16 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  floatingButton: {
+    backgroundColor: STYLES.colors.blue[600],
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 20,
+    right: 30,
   },
 });

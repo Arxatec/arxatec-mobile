@@ -11,24 +11,47 @@ import {
 interface Props {
   children: React.ReactNode;
   paddingHorizontal?: number;
+  scrollEnabled?: boolean;
+  statusBarBackground?: string;
+  translucent?: boolean;
+  marginTop?: number;
 }
 
 export const PageContainer: React.FC<Props> = ({
   children,
-  paddingHorizontal = 32,
+  paddingHorizontal = 16,
+  scrollEnabled = true,
+  statusBarBackground = 'transparent',
+  translucent = true,
+  marginTop = 48,
 }) => {
   return (
     <SafeAreaView style={styles.containerPage}>
       <StatusBar
-        backgroundColor="transparent"
-        translucent
+        backgroundColor={statusBarBackground}
+        translucent={translucent}
         barStyle="dark-content"
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: 16, paddingHorizontal: paddingHorizontal}}>
+      {scrollEnabled ? (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View
+            style={{
+              marginTop: translucent ? marginTop : 0,
+              paddingHorizontal: paddingHorizontal,
+            }}>
+            {children}
+          </View>
+        </ScrollView>
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            marginTop: translucent ? marginTop : 0,
+            paddingHorizontal: paddingHorizontal,
+          }}>
           {children}
         </View>
-      </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

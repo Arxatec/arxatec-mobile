@@ -84,7 +84,6 @@ const style = StyleSheet.create({
   },
   buttonLinkText: {
     fontSize: 12,
-    fontWeight: '600',
     color: STYLES.colors.blue[500],
     fontFamily: STYLES.fonts.regular,
     textAlign: 'center',
