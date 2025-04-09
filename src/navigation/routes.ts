@@ -18,6 +18,7 @@ export enum RoutesTabs {
 export enum Messages {
   ViewChats = 'ViewChats',
   ViewChat = 'ViewChat',
+  InfoChat = 'InfoChat',
 }
 
 export enum Community {

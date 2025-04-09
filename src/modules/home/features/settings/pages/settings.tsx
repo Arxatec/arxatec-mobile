@@ -180,8 +180,8 @@ export default function Settings() {
         <Section>
           <MenuItem
             icon={<BellIcon size={18} color={STYLES.colors.black[500]} />}
-            title="Notification"
-            subtitle="Customize your notification preferences"
+            title="Notificaciones"
+            subtitle="Personaliza tus preferencias"
             showArrow={false}
             showSwitch={true}
             switchValue={notificationsEnabled}

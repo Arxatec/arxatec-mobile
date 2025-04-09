@@ -41,7 +41,7 @@ export const CalendarText: React.FC<CalendarTextProps> = ({
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: STYLES.fonts.bold,
     color: STYLES.colors.black[800],
   },

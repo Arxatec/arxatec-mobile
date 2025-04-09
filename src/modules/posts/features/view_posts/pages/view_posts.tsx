@@ -1,8 +1,17 @@
 import {PageContainer} from '@/components/layout';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {ShortPost} from '../components/molecules/short_post';
 import {STYLES} from '@/utils';
 import Share from 'react-native-share';
+import {PlusIcon} from 'react-native-heroicons/outline';
+import {useAppNavigation} from '@/hooks';
+import {Community} from '@/navigation/routes';
 
 export default function ViewPosts() {
   const postsData = [
@@ -201,6 +210,11 @@ export default function ViewPosts() {
   const handleOptionSelected = (postId: string, option: string) => {
     console.log(`Option ${option} selected for post ${postId}`);
   };
+
+  const {navigateTo} = useAppNavigation();
+
+  const navigateToCreatePost = () => navigateTo(Community.CreatePost);
+
   return (
     <PageContainer
       statusBarBackground={STYLES.colors.white[1]}
@@ -208,6 +222,13 @@ export default function ViewPosts() {
       scrollEnabled={false}>
       <View style={styles.header}>
         <Text style={styles.title}>Publicaciones</Text>
+        <TouchableOpacity onPress={navigateToCreatePost}>
+          <PlusIcon
+            size={20}
+            strokeWidth={2}
+            color={STYLES.colors.black[900]}
+          />
+        </TouchableOpacity>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -237,7 +258,7 @@ export default function ViewPosts() {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: STYLES.fonts.bold,
     color: STYLES.colors.black[800],
   },

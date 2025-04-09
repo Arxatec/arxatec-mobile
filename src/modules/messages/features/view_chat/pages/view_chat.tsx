@@ -204,6 +204,7 @@ export default function ViewChat() {
 
   const {navigateTo} = useAppNavigation();
   const navigateToChats = () => navigateTo(Messages.ViewChats);
+  const navigateToInfoChat = () => navigateTo(Messages.InfoChat);
 
   const renderMessage = ({item}: {item: Message}) => {
     const isSent = item.type === 'sent';
@@ -250,7 +251,7 @@ export default function ViewChat() {
           </TouchableOpacity>
           <Text style={styles.title}>Juan Perez</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={navigateToInfoChat}>
           <EllipsisVerticalIcon size={24} color={STYLES.colors.black[700]} />
         </TouchableOpacity>
       </View>
@@ -333,8 +334,6 @@ const styles = StyleSheet.create({
   sender: {
     fontFamily: STYLES.fonts.bold,
     fontSize: 12,
-    marginBottom: 4,
-    marginTop: 8,
     color: STYLES.colors.black[900],
   },
   bubble: {
@@ -373,7 +372,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   receivedBubble: {
-    backgroundColor: STYLES.colors.black[50],
+    backgroundColor: STYLES.colors.black[100],
+    marginTop: 8,
   },
   sentText: {
     color: STYLES.colors.white[1],
