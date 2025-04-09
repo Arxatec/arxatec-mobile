@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Community, Messages} from '@/navigation/routes.ts';
+import {Community} from '@/navigation/routes.ts';
 import ViewPosts from '@/modules/posts/features/view_posts/pages/view_posts';
 import ViewPost from '@/modules/posts/features/view_post/page/view_post';
 import CreatePost from '@/modules/posts/features/create_post/pages/create_post';

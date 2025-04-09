@@ -36,7 +36,7 @@ export const CustomInput: React.FC<Props> = ({
         )}
 
         <TextInput
-          style={[styles.input]}
+          style={[styles.input, {paddingHorizontal: startAdornment ? 8 : 16}]}
           secureTextEntry={isPassword && !showPassword}
           placeholderTextColor={STYLES.colors.black[400]}
           cursorColor={STYLES.colors.blue[500]}
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     fontFamily: STYLES.fonts.regular,
     fontSize: 14,
     color: STYLES.colors.black[950],
-    paddingHorizontal: 16,
     flex: 1,
   },
   startAdornment: {

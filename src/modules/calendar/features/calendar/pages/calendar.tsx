@@ -98,10 +98,6 @@ export default function Calendar() {
           getEventsForDay={getEventsForDay}
         />
       </View>
-
-      <TouchableOpacity style={styles.floatingButton}>
-        <PlusIcon size={20} color="#FFF"></PlusIcon>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -113,16 +109,5 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  floatingButton: {
-    backgroundColor: STYLES.colors.blue[600],
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 20,
-    right: 30,
   },
 });

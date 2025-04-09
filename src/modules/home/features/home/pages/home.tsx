@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   activeTabButton: {
-    backgroundColor: STYLES.colors.blue[600],
+    backgroundColor: STYLES.colors.blue[100],
   },
   tabButtonText: {
     fontSize: 14,
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
     color: STYLES.colors.black[600],
   },
   activeTabButtonText: {
-    color: STYLES.colors.white[1],
+    color: STYLES.colors.blue[600],
   },
   paymentCard: {
     backgroundColor: STYLES.colors.blue[600],

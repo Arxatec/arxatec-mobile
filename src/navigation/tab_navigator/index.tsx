@@ -18,6 +18,7 @@ import MessageNavigator from '../message_navigator';
 import CommunityNavigator from '../community_navigator';
 import HomeNavigator from '../home_navigator';
 import {STYLES} from '@/utils';
+import CalendarNavigator from '../calendar_navigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +44,7 @@ const Tabs = [
   },
   {
     name: RoutesTabs.Calendar,
-    component: Calendar,
+    component: CalendarNavigator,
     iconActive: CalendarDaysIcon,
     label: 'Calendario',
   },

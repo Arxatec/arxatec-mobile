@@ -33,6 +33,11 @@ export enum Home {
   Notification = 'Notification',
 }
 
+export enum Calendar {
+  CalendarDay = 'CalendarDay',
+  CreateEvent = 'CreateEvent',
+}
+
 export type RootStackParamList = {
   [Routes.Introduction]: undefined;
   [Routes.Register]: undefined;

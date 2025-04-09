@@ -1,8 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
-import {ChevronDownIcon} from 'react-native-heroicons/outline';
+import {
+  ChevronDownIcon,
+  MagnifyingGlassIcon,
+} from 'react-native-heroicons/outline';
 import {STYLES} from '@/utils/styles-utils';
+import {CustomInput} from '../custom_input';
 
 interface DropdownItem {
   label: string;
@@ -16,18 +20,23 @@ interface CustomDropdownProps {
   placeholder?: string;
   labelField?: string;
   valueField?: string;
+  label?: string;
+  search?: boolean;
 }
 
 export const CustomDropdown = ({
   data,
   value,
   onChange,
+  label,
   placeholder = 'Seleccionar',
   labelField = 'label',
   valueField = 'value',
+  search = false,
 }: CustomDropdownProps) => {
   return (
     <View style={styles.container}>
+      {label && <Text style={styles.label}>{label}</Text>}
       <Dropdown
         containerStyle={{
           backgroundColor: '#FFF',
@@ -36,16 +45,18 @@ export const CustomDropdown = ({
           borderWidth: 1,
           borderColor: STYLES.colors.black[100],
         }}
-        itemContainerStyle={{}}
         itemTextStyle={{
           fontFamily: STYLES.fonts.regular,
           fontSize: 14,
           color: STYLES.colors.black[600],
         }}
+        searchPlaceholder="Buscar..."
+        searchPlaceholderTextColor={STYLES.colors.black[400]}
+        search={search}
         style={styles.dropdown}
+        activeColor={STYLES.colors.black[200]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
         data={data}
         maxHeight={300}
@@ -53,6 +64,29 @@ export const CustomDropdown = ({
         valueField={valueField}
         placeholder={placeholder}
         value={value}
+        showsVerticalScrollIndicator={false}
+        renderInputSearch={onSearch => (
+          <View
+            style={{
+              padding: 8,
+            }}>
+            <View
+              style={{
+                height: 45,
+              }}>
+              <CustomInput
+                placeholder="Buscar..."
+                onChangeText={onSearch}
+                startAdornment={
+                  <MagnifyingGlassIcon
+                    size={18}
+                    color={STYLES.colors.black[400]}
+                  />
+                }
+              />
+            </View>
+          </View>
+        )}
         onChange={item => {
           onChange(item[valueField]);
         }}
@@ -69,10 +103,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   dropdown: {
-    height: 45,
-    borderColor: STYLES.colors.black[300],
+    height: 42,
+    borderColor: STYLES.colors.black[200],
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 10,
     paddingHorizontal: 12,
     backgroundColor: '#FFF',
   },
@@ -90,10 +124,11 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-    borderColor: STYLES.colors.black[300],
-    fontFamily: STYLES.fonts.regular,
+
+  label: {
+    color: STYLES.colors.black[600],
+    fontFamily: STYLES.fonts.medium,
+    fontSize: 14,
+    marginBottom: 8,
   },
 });

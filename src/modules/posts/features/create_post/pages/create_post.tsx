@@ -106,12 +106,6 @@ export default function CreatePost() {
     // Aquí iría la lógica para publicar
   };
 
-  const handleCancel = () => {
-    // Lógica para cancelar
-    setTitle('');
-    setContent('');
-  };
-
   return (
     <PageContainer
       scrollEnabled={false}
@@ -125,9 +119,7 @@ export default function CreatePost() {
           <Text style={styles.title}>Crear publicación</Text>
         </View>
       </View>
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
             backgroundColor: '#FFF',
@@ -135,9 +127,9 @@ export default function CreatePost() {
             padding: 16,
             marginBottom: 4,
           }}>
-          <Text style={styles.sectionTitle}>Elige tu comunidad</Text>
           <View style={styles.dropdownContainer}>
             <CustomDropdown
+              label="Elige tu comunidad"
               data={communities}
               value={selectedCommunity}
               onChange={setSelectedCommunity}
@@ -238,13 +230,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   container: {},
-  scrollContainer: {},
-  sectionTitle: {
-    color: STYLES.colors.black[600],
-    fontFamily: STYLES.fonts.medium,
-    fontSize: 14,
-    marginBottom: 4,
-  },
+
   dropdownContainer: {},
   tabContainer: {
     flexDirection: 'row',
