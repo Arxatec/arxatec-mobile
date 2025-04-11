@@ -1,5 +1,6 @@
 import {CustomInput, PrimaryButton} from '@/components/atoms';
-import {StyleSheet} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 
 interface Props {
   handleStep: () => void;
@@ -7,7 +8,7 @@ interface Props {
 
 export const EnterEmailStep: React.FC<Props> = ({handleStep}) => {
   return (
-    <>
+    <View style={styles.container}>
       <CustomInput
         label="Correo electrónico"
         placeholder="Ej. email@email.com"
@@ -19,11 +20,16 @@ export const EnterEmailStep: React.FC<Props> = ({handleStep}) => {
         style={styles.button}
         onPress={handleStep}
       />
-    </>
+    </View>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    padding: 16,
+  },
   button: {
-    marginTop: 24,
+    marginTop: 16,
   },
 });

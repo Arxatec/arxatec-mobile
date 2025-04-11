@@ -29,7 +29,13 @@ export default function Introduction() {
           }}></Image>
       </View>
       <View style={styles.container}>
-        <View>
+        <View
+          style={{
+            padding: 16,
+            backgroundColor: '#FFF',
+            borderRadius: 16,
+            flex: 1,
+          }}>
           <Text style={styles.title}>
             Conecta clientes y abogados en un solo lugar
           </Text>
@@ -37,24 +43,24 @@ export default function Introduction() {
             Maneja tus casos con eficiencia, accede a asesoría legal al instante
             y forma parte de una comunidad activa para compartir conocimientos.
           </Text>
-        </View>
-        <View>
-          <PrimaryButton
-            onPress={navigateToAuthOptions}
-            title="Empezar ahora"
-            style={styles.button}
-          />
-          <Text style={styles.disclaimerText}>
-            Al continuar, aceptas nuestros{' '}
-            <Text onPress={() => {}} style={styles.disclamerTextLink}>
-              términos y condiciones
-            </Text>{' '}
-            y nuestra{' '}
-            <Text onPress={() => {}} style={styles.disclamerTextLink}>
-              política de privacidad
+          <View>
+            <PrimaryButton
+              onPress={navigateToAuthOptions}
+              title="Empezar ahora"
+              style={styles.button}
+            />
+            <Text style={styles.disclaimerText}>
+              Al continuar, aceptas nuestros{' '}
+              <Text onPress={() => {}} style={styles.disclamerTextLink}>
+                términos y condiciones
+              </Text>{' '}
+              y nuestra{' '}
+              <Text onPress={() => {}} style={styles.disclamerTextLink}>
+                política de privacidad
+              </Text>
+              .
             </Text>
-            .
-          </Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -68,8 +74,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 3,
-    paddingHorizontal: 32,
+    paddingHorizontal: 16,
     justifyContent: 'center',
+    marginTop: 4,
+    marginBottom: 4,
   },
   imageContainer: {
     flex: 6,
@@ -88,16 +96,17 @@ const styles = StyleSheet.create({
     color: STYLES.colors.black[900],
     textAlign: 'center',
     lineHeight: 24,
+    marginTop: 8,
   },
   text: {
     textAlign: 'center',
-    marginTop: 8,
+    marginTop: 16,
     fontFamily: STYLES.fonts.regular,
     fontSize: 14,
     color: STYLES.colors.black[700],
   },
   button: {
-    marginTop: 32,
+    marginTop: 24,
   },
   disclaimerText: {
     fontSize: 12,

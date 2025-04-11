@@ -28,7 +28,7 @@ export const EnterCodeStep: React.FC<Props> = ({handleStep}) => {
   };
 
   return (
-    <>
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         {inputRefs.map((ref, index) => (
           <TextInput
@@ -57,11 +57,16 @@ export const EnterCodeStep: React.FC<Props> = ({handleStep}) => {
         style={styles.button}
         onPress={handleStep}
       />
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+  },
   button: {
     marginTop: 16,
   },
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 8,
     color: STYLES.colors.black[950],
-    backgroundColor: STYLES.colors.white[1],
+    backgroundColor: '#FFF',
     fontSize: 32,
     textAlign: 'center',
   },

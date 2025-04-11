@@ -45,23 +45,28 @@ export default function AuthOptions() {
 
 const styles = StyleSheet.create({
   containerOptions: {
-    marginTop: 24,
+    backgroundColor: '#FFF',
+    padding: 16,
+    borderRadius: 8,
+    marginTop: 4,
+    gap: 8,
   },
   button: {
+    borderWidth: 1,
+    borderColor: STYLES.colors.black[200],
+    backgroundColor: '#FFF',
     width: '100%',
-    backgroundColor: STYLES.colors.black[100],
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderRadius: 5,
+    borderRadius: 8,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    marginTop: 10,
   },
   buttonText: {
     fontSize: 14,
-    color: STYLES.colors.black[900],
-    fontFamily: STYLES.fonts.semi_bold,
+    color: STYLES.colors.black[600],
+    fontFamily: STYLES.fonts.medium,
   },
   iconLogo: {
     width: 20,

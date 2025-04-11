@@ -12,13 +12,12 @@ import {
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import {RoutesTabs} from '../routes';
-import ViewCases from '@/modules/cases/features/view_cases/pages/view_cases';
-import Calendar from '@/modules/calendar/features/calendar/pages/calendar';
 import MessageNavigator from '../message_navigator';
 import CommunityNavigator from '../community_navigator';
 import HomeNavigator from '../home_navigator';
 import {STYLES} from '@/utils';
 import CalendarNavigator from '../calendar_navigator';
+import CasesNavigator from '../cases_navigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +37,7 @@ const Tabs = [
   },
   {
     name: RoutesTabs.Cases,
-    component: ViewCases,
+    component: CasesNavigator,
     iconActive: ArchiveBoxIcon,
     label: 'Casos',
   },

@@ -125,6 +125,8 @@ export default function Settings() {
   const {navigateTo} = useAppNavigation();
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
   const navigateToDashboard = () => navigateTo(Home.Dashboard);
+  const navigateToChangePassword = () => navigateTo(Home.ChangePassword);
+  const navigateToEditProfile = () => navigateTo(Home.EditProfile);
 
   const handleToggleNotifications = (value: boolean) => {
     setNotificationsEnabled(value);
@@ -150,27 +152,20 @@ export default function Settings() {
 
         <Section>
           <MenuItem
-            icon={<PencilIcon size={18} color={STYLES.colors.black[500]} />}
+            icon={<PencilIcon size={18} color={STYLES.colors.blue[600]} />}
             title="Editar perfil"
             subtitle="Cambia tu foto de perfil, número, ubicación"
-            onPress={() => {}}
+            onPress={navigateToEditProfile}
           />
           <MenuItem
-            icon={<LockClosedIcon size={18} color={STYLES.colors.black[500]} />}
+            icon={<LockClosedIcon size={18} color={STYLES.colors.blue[600]} />}
             title="Cambiar contraseña"
             subtitle="Para una cuenta más segura"
-            onPress={() => {}}
+            onPress={navigateToChangePassword}
           />
+
           <MenuItem
-            icon={
-              <DocumentTextIcon size={18} color={STYLES.colors.black[500]} />
-            }
-            title="Terminos y condiciones"
-            subtitle="Protegemos tu cuenta ahora"
-            onPress={() => {}}
-          />
-          <MenuItem
-            icon={<CreditCardIcon size={18} color={STYLES.colors.black[500]} />}
+            icon={<CreditCardIcon size={18} color={STYLES.colors.blue[600]} />}
             title="Añadir cuenta"
             subtitle="Añade tu metodo de pago favorito"
             onPress={() => {}}
@@ -179,7 +174,7 @@ export default function Settings() {
 
         <Section>
           <MenuItem
-            icon={<BellIcon size={18} color={STYLES.colors.black[500]} />}
+            icon={<BellIcon size={18} color={STYLES.colors.blue[600]} />}
             title="Notificaciones"
             subtitle="Personaliza tus preferencias"
             showArrow={false}
@@ -189,9 +184,17 @@ export default function Settings() {
           />
           <MenuItem
             icon={
+              <DocumentTextIcon size={18} color={STYLES.colors.blue[600]} />
+            }
+            title="Terminos y condiciones"
+            subtitle="Protegemos tu cuenta ahora"
+            onPress={() => {}}
+          />
+          <MenuItem
+            icon={
               <QuestionMarkCircleIcon
                 size={18}
-                color={STYLES.colors.black[500]}
+                color={STYLES.colors.blue[600]}
               />
             }
             title="Preguntas frecuentes"
@@ -292,7 +295,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 8,
-    backgroundColor: STYLES.colors.black[100],
+    backgroundColor: STYLES.colors.blue[50],
     justifyContent: 'center',
     alignItems: 'center',
   },

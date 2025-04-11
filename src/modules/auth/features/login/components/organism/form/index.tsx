@@ -29,23 +29,24 @@ export const Form = () => {
             isPassword={true}
           />
         </View>
+        <View style={{flex: 1, alignItems: 'flex-end', marginTop: 16}}>
+          <TouchableOpacity onPress={navigateToForgotPassword}>
+            <Text style={style.buttonLinkText}>¿Olvidaste tu contraseña?</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      <View style={{flex: 1, alignItems: 'flex-end', marginTop: 16}}>
-        <TouchableOpacity onPress={navigateToForgotPassword}>
-          <Text style={style.buttonLinkText}>¿Olvidaste tu contraseña?</Text>
-        </TouchableOpacity>
-      </View>
+      <View style={style.containerActions}>
+        <View>
+          <PrimaryButton title="Ingresar" onPress={navigateToTabs} />
+        </View>
 
-      <View style={style.buttonSeparator}>
-        <PrimaryButton title="Ingresar" onPress={navigateToTabs} />
+        <AccountInquiry
+          text={'No tienes cuenta?'}
+          buttonText={'Crear cuenta'}
+          action={navigateToRegister}
+        />
       </View>
-
-      <AccountInquiry
-        text={'No tienes cuenta?'}
-        buttonText={'Crear cuenta'}
-        action={navigateToRegister}
-      />
     </View>
   );
 };
@@ -55,14 +56,21 @@ const style = StyleSheet.create({
     paddingHorizontal: 32,
     marginTop: 40,
   },
+  containerActions: {
+    marginTop: 4,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    padding: 16,
+  },
   inputSeparator: {
     marginTop: 16,
   },
-  buttonSeparator: {
-    marginTop: 32,
-  },
+
   containerForm: {
-    marginTop: 32,
+    marginTop: 4,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    padding: 16,
   },
   buttonLinkText: {
     fontSize: 14,

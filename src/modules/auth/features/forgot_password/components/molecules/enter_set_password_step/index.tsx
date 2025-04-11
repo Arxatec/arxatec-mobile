@@ -7,7 +7,7 @@ interface Props {
 
 export const EnterSetPassword: React.FC<Props> = ({handleStep}) => {
   return (
-    <>
+    <View style={styles.container}>
       <CustomInput
         label="Contraseña: "
         placeholder="Ej. BawW235gS#"
@@ -30,14 +30,19 @@ export const EnterSetPassword: React.FC<Props> = ({handleStep}) => {
         style={styles.button}
         onPress={handleStep}
       />
-    </>
+    </View>
   );
 };
 const styles = StyleSheet.create({
   button: {
-    marginTop: 24,
+    marginTop: 16,
   },
   inputDivider: {
     marginTop: 16,
+  },
+  container: {
+    padding: 16,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
   },
 });

@@ -9,6 +9,6 @@ export const Form: React.FC<Props> = ({children}) => {
 
 const styles = StyleSheet.create({
   containerForm: {
-    marginTop: 24,
+    marginTop: 4,
   },
 });

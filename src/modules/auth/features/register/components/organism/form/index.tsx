@@ -55,15 +55,14 @@ export const Form = () => {
         </View>
       </View>
 
-      <View style={style.buttonSeparator}>
+      <View style={style.containerActions}>
         <PrimaryButton title="Registrarse" />
+        <AccountInquiry
+          text={'Ya tienes cuenta?'}
+          buttonText={'Iniciar sesión'}
+          action={navigateToLogin}
+        />
       </View>
-
-      <AccountInquiry
-        text={'Ya tienes cuenta?'}
-        buttonText={'Iniciar sesión'}
-        action={navigateToLogin}
-      />
     </View>
   );
 };
@@ -80,12 +79,21 @@ const style = StyleSheet.create({
     marginTop: 32,
   },
   containerForm: {
-    marginTop: 32,
+    marginTop: 4,
+    backgroundColor: '#FFF',
+    padding: 16,
+    borderRadius: 8,
   },
   buttonLinkText: {
     fontSize: 12,
     color: STYLES.colors.blue[500],
     fontFamily: STYLES.fonts.regular,
     textAlign: 'center',
+  },
+  containerActions: {
+    marginTop: 4,
+    backgroundColor: '#FFF',
+    padding: 16,
+    borderRadius: 8,
   },
 });

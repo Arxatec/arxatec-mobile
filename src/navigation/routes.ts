@@ -31,6 +31,13 @@ export enum Home {
   Dashboard = 'Dashboard',
   Settings = 'Settings',
   Notification = 'Notification',
+  ChangePassword = 'ChangePassword',
+  EditProfile = 'EditProfile',
+}
+
+export enum Cases {
+  ViewCases = 'ViewCases',
+  ViewCase = 'ViewCase',
 }
 
 export enum Calendar {
