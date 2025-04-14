@@ -3,6 +3,7 @@ import {PageContainer} from '@/components/layout';
 import {useAppNavigation} from '@/hooks';
 import {Cases} from '@/navigation/routes';
 import {STYLES} from '@/utils';
+import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import {
   Modal,
@@ -10,20 +11,19 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
+import {View} from 'react-native';
 import {
-  ArrowUpRightIcon,
-  EllipsisVerticalIcon,
+  ArrowLeftIcon,
   MagnifyingGlassIcon,
 } from 'react-native-heroicons/outline';
 import {
-  UsersIcon,
+  EllipsisVerticalIcon,
   FolderIcon,
-  FolderPlusIcon,
-  FolderOpenIcon,
+  MapPinIcon,
 } from 'react-native-heroicons/solid';
 
+type TabId = 'all' | 'job' | 'self' | 'family' | 'economy' | 'culture' | 'home';
 const casesList = [
   {
     id: 1,
@@ -115,9 +115,6 @@ interface TabItem {
   id: TabId;
   label: string;
 }
-
-type TabId = 'all' | 'job' | 'self' | 'family' | 'economy' | 'culture' | 'home';
-
 const tabs: TabItem[] = [
   {id: 'all', label: 'Todos'},
   {id: 'job', label: 'Laboral'},
@@ -128,83 +125,30 @@ const tabs: TabItem[] = [
   {id: 'home', label: 'Vivienda'},
 ];
 
-export default function ViewCases() {
+export default function ExplorerCases() {
+  const {goBack} = useNavigation();
+  const {navigateTo} = useAppNavigation();
   const [activeTab, setActiveTab] = useState<TabId>('all');
   const [modalVisible, setModalVisible] = useState(false);
-  const {navigateTo} = useAppNavigation();
   const handleOptionSelected = (option: string) => {
     setModalVisible(false);
   };
-  const caseOptions = [
-    {
-      id: 2,
-      title: 'Explorar casos',
-      icon: FolderOpenIcon,
-      color: STYLES.colors.purple[600],
-      action: () => navigateTo(Cases.ExplorerCases),
-    },
-    {
-      id: 1,
-      title: 'Agregar caso',
-      icon: FolderPlusIcon,
-      color: STYLES.colors.blue[600],
-      action: () => navigateTo(Cases.CreateCase),
-    },
-    {
-      id: 3,
-      title: 'Mis clientes',
-      icon: UsersIcon,
-      color: STYLES.colors.sky[500],
-      action: () => navigateTo(Cases.ViewClients),
-    },
-  ];
-
   return (
     <PageContainer
-      statusBarBackground={STYLES.colors.white[1]}
-      translucent={false}
       scrollEnabled={false}
-      paddingHorizontal={0}>
-      <View style={styles.fixedHeader}>
-        <View style={styles.headerContainer}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Mis casos</Text>
-          </View>
+      translucent={false}
+      statusBarBackground={STYLES.colors.white[1]}>
+      <View style={styles.header}>
+        <View style={styles.titleContainer}>
+          <TouchableOpacity onPress={goBack}>
+            <ArrowLeftIcon size={20} color={STYLES.colors.black[700]} />
+          </TouchableOpacity>
+          <Text style={styles.title}>Explorar casos</Text>
         </View>
       </View>
 
-      <ScrollView
-        style={styles.scrollableContent}
-        showsVerticalScrollIndicator={false}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.scrollViewContent}>
-          {caseOptions.map(option => (
-            <TouchableOpacity
-              key={option.id}
-              style={styles.option}
-              onPress={option.action}>
-              <View>
-                <View
-                  style={[
-                    styles.optionIconContainer,
-                    {backgroundColor: option.color},
-                  ]}>
-                  <option.icon color="#FFF" size={20} />
-                </View>
-                <Text style={styles.optionText}>{option.title}</Text>
-              </View>
-              <ArrowUpRightIcon
-                size={16}
-                color={STYLES.colors.black[500]}
-                strokeWidth={2}
-              />
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        <View style={styles.searchContainer}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
           <View style={styles.searchBox}>
             <View style={{paddingHorizontal: 16, paddingTop: 16}}>
               <View style={styles.inputContainer}>
@@ -216,6 +160,14 @@ export default function ViewCases() {
                     />
                   }
                   placeholder="Buscar..."
+                />
+              </View>
+              <View style={[styles.inputContainer, {marginTop: 4}]}>
+                <CustomInput
+                  startAdornment={
+                    <MapPinIcon size={18} color={STYLES.colors.black[400]} />
+                  }
+                  placeholder="Ubicación"
                 />
               </View>
             </View>
@@ -244,7 +196,7 @@ export default function ViewCases() {
           </View>
         </View>
 
-        <View style={styles.casesContainer}>
+        <View>
           {casesList.map(caseItem => (
             <TouchableOpacity
               key={caseItem.id}
@@ -307,12 +259,10 @@ export default function ViewCases() {
 }
 
 const styles = StyleSheet.create({
-  fixedHeader: {
-    backgroundColor: STYLES.colors.white[1],
-    paddingBottom: 4,
-  },
-  headerContainer: {
-    paddingHorizontal: 16,
+  titleContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,
@@ -323,55 +273,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 4,
     backgroundColor: '#FFF',
     borderRadius: 10,
-    padding: 10,
+    paddingVertical: 10,
+    paddingLeft: 10,
+    paddingRight: 15,
+    overflow: 'hidden',
   },
-  scrollableContent: {
-    flex: 1,
-    borderRadius: 10,
-  },
-  scrollViewContent: {
-    paddingHorizontal: 16,
-    flexDirection: 'row',
-    gap: 6,
-    alignSelf: 'flex-start',
-  },
-  option: {
-    backgroundColor: '#FFF',
-    borderRadius: 8,
-    padding: 16,
-    width: 250,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    flexShrink: 1,
-  },
-  optionIconContainer: {
-    width: 40,
-    height: 40,
-    backgroundColor: STYLES.colors.blue[600],
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 8,
-  },
-  optionText: {
-    fontFamily: STYLES.fonts.semi_bold,
-    color: STYLES.colors.black[900],
-    fontSize: 14,
-    marginTop: 8,
-  },
-  searchContainer: {
-    paddingHorizontal: 16,
-    marginTop: 4,
-  },
+
   searchBox: {
     borderRadius: 8,
     backgroundColor: '#FFF',
     paddingBottom: 16,
   },
   inputContainer: {
-    height: 42,
+    height: 43,
   },
   tabsScrollContent: {
     flexDirection: 'row',
@@ -395,9 +312,7 @@ const styles = StyleSheet.create({
   activeTabButtonText: {
     color: STYLES.colors.blue[600],
   },
-  casesContainer: {
-    paddingHorizontal: 16,
-  },
+
   caseItemContainer: {
     marginTop: 4,
   },

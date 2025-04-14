@@ -38,6 +38,9 @@ export enum Home {
 export enum Cases {
   ViewCases = 'ViewCases',
   ViewCase = 'ViewCase',
+  CreateCase = 'CreateCase',
+  ViewClients = 'ViewClients',
+  ExplorerCases = 'ExplorerCases',
 }
 
 export enum Calendar {

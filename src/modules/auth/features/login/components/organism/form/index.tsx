@@ -4,12 +4,26 @@ import {AccountInquiry} from '@/modules/auth/components/atoms';
 import {Routes} from '@/navigation/routes';
 import {STYLES} from '@/utils';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Toast} from 'toastify-react-native';
 
 export const Form = () => {
   const {navigateTo} = useAppNavigation();
   const navigateToRegister = () => navigateTo(Routes.Register);
   const navigateToTabs = () => navigateTo(Routes.Tabs);
   const navigateToForgotPassword = () => navigateTo(Routes.ForgotPassword);
+
+  const handleLogin = () => {
+    Toast.show({
+      type: 'success',
+      text1: '¡Bienvenido!',
+      text2: 'Has iniciado sesión correctamente',
+      position: 'bottom',
+      visibilityTime: 3000,
+      bottomOffset: 50,
+    });
+    navigateToTabs();
+  };
+
   return (
     <View>
       <View style={style.containerForm}>
@@ -38,7 +52,7 @@ export const Form = () => {
 
       <View style={style.containerActions}>
         <View>
-          <PrimaryButton title="Ingresar" onPress={navigateToTabs} />
+          <PrimaryButton title="Ingresar" onPress={handleLogin} />
         </View>
 
         <AccountInquiry

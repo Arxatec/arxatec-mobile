@@ -1,8 +1,7 @@
 import {CustomAvatar} from '@/components/atoms';
 import {PageContainer} from '@/components/layout';
-import {useAppNavigation} from '@/hooks';
-import {Cases} from '@/navigation/routes';
 import {STYLES} from '@/utils';
+import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import {
   Modal,
@@ -58,21 +57,17 @@ const caseInfo = [
   },
   {
     id: 1,
-    label: 'Fecha de creación',
+    label: 'Creación',
     value: '10/10/2025',
     icon: <CalendarDaysIcon size={20} color={STYLES.colors.blue[500]} />,
     color: STYLES.colors.blue[100],
   },
 ];
-
 export default function ViewCase() {
-  const {navigateTo} = useAppNavigation();
+  const {goBack} = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const handleOptionSelected = (option: string) => {
     setModalVisible(false);
-  };
-  const navigateToCases = () => {
-    navigateTo(Cases.ViewCases);
   };
   return (
     <PageContainer
@@ -82,7 +77,7 @@ export default function ViewCase() {
       paddingHorizontal={0}>
       <View style={styles.fixedHeader}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={navigateToCases}>
+          <TouchableOpacity onPress={goBack}>
             <ArrowLeftIcon size={20} color={STYLES.colors.black[900]} />
           </TouchableOpacity>
         </View>
