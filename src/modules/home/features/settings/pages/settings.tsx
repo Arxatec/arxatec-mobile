@@ -1,16 +1,7 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  Switch,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import {STYLES} from '@/utils';
 import {PageContainer} from '@/components/layout';
-import {ArrowLeftIcon, ChevronRightIcon} from 'react-native-heroicons/outline';
-import {CustomAvatar} from '@/components/atoms';
 import {useAppNavigation} from '@/hooks';
 import {Home} from '@/navigation/routes';
 import {
@@ -22,108 +13,17 @@ import {
   QuestionMarkCircleIcon,
   ArrowRightOnRectangleIcon,
 } from 'react-native-heroicons/solid';
-
-interface MenuItemProps {
-  icon: React.ReactNode;
-  title: string;
-  subtitle?: string;
-  showArrow?: boolean;
-  showSwitch?: boolean;
-  switchValue?: boolean;
-  onSwitchChange?: (value: boolean) => void;
-  onPress?: () => void;
-  color?: string;
-  textColor?: string;
-  hasSubtitle?: boolean;
-}
-
-const MenuItem: React.FC<MenuItemProps> = ({
-  icon,
-  title,
-  subtitle,
-  showArrow = true,
-  showSwitch = false,
-  switchValue = false,
-  onSwitchChange,
-  onPress,
-  color,
-  textColor,
-  hasSubtitle = true,
-}) => {
-  return (
-    <TouchableOpacity style={styles.menuItem} onPress={onPress}>
-      <View style={styles.menuItemLeft}>
-        <View
-          style={[
-            styles.iconContainer,
-            color ? {backgroundColor: color} : null,
-          ]}>
-          {icon}
-        </View>
-        <View style={styles.menuItemTextContainer}>
-          <Text
-            style={[
-              styles.menuItemTitle,
-              textColor ? {color: textColor} : null,
-            ]}>
-            {title}
-          </Text>
-          {hasSubtitle && (
-            <Text style={styles.menuItemSubtitle}>{subtitle}</Text>
-          )}
-        </View>
-      </View>
-      {showArrow && !showSwitch && (
-        <ChevronRightIcon size={18} color={STYLES.colors.black[500]} />
-      )}
-      {showSwitch && (
-        <Switch
-          value={switchValue}
-          onValueChange={onSwitchChange}
-          trackColor={{
-            false: STYLES.colors.black[200],
-            true: STYLES.colors.blue[600],
-          }}
-          thumbColor="#FFFFFF"
-        />
-      )}
-    </TouchableOpacity>
-  );
-};
-
-interface SectionProps {
-  children: React.ReactNode;
-}
-
-const Section: React.FC<SectionProps> = ({children}) => {
-  return (
-    <View style={styles.section}>
-      <View style={styles.sectionContent}>{children}</View>
-    </View>
-  );
-};
-
-const ProfileHeader: React.FC = () => {
-  return (
-    <View>
-      <View style={styles.profileInfo}>
-        <CustomAvatar
-          avatar="https://images.pexels.com/photos/4975660/pexels-photo-4975660.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          size={45}
-          username="Rafael Aguirre"
-        />
-        <View style={styles.profileTextContainer}>
-          <Text style={styles.profileName}>Rafael Aguirre</Text>
-          <Text style={styles.profileEmail}>rafaelaguirre@gmail.com</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
+import {
+  SettingsHeader,
+  SettingsSection,
+  ProfileHeader,
+  MenuItem,
+} from '../components';
 
 export default function Settings() {
   const {navigateTo} = useAppNavigation();
-  const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+
   const navigateToDashboard = () => navigateTo(Home.Dashboard);
   const navigateToChangePassword = () => navigateTo(Home.ChangePassword);
   const navigateToEditProfile = () => navigateTo(Home.EditProfile);
@@ -137,20 +37,14 @@ export default function Settings() {
       scrollEnabled={false}
       statusBarBackground={STYLES.colors.white[1]}
       translucent={false}>
-      <View style={styles.header}>
-        <View style={styles.titleContainer}>
-          <TouchableOpacity onPress={navigateToDashboard}>
-            <ArrowLeftIcon size={20} color={STYLES.colors.black[900]} />
-          </TouchableOpacity>
-          <Text style={styles.title}>Configuración</Text>
-        </View>
-      </View>
+      <SettingsHeader onBackPress={navigateToDashboard} />
+
       <ScrollView style={styles.scrollView}>
         <View style={styles.card}>
           <ProfileHeader />
         </View>
 
-        <Section>
+        <SettingsSection>
           <MenuItem
             icon={<PencilIcon size={18} color={STYLES.colors.blue[600]} />}
             title="Editar perfil"
@@ -163,16 +57,15 @@ export default function Settings() {
             subtitle="Para una cuenta más segura"
             onPress={navigateToChangePassword}
           />
-
           <MenuItem
             icon={<CreditCardIcon size={18} color={STYLES.colors.blue[600]} />}
             title="Añadir cuenta"
             subtitle="Añade tu metodo de pago favorito"
             onPress={() => {}}
           />
-        </Section>
+        </SettingsSection>
 
-        <Section>
+        <SettingsSection>
           <MenuItem
             icon={<BellIcon size={18} color={STYLES.colors.blue[600]} />}
             title="Notificaciones"
@@ -210,33 +103,13 @@ export default function Settings() {
             textColor="#ef4444"
             showArrow={false}
           />
-        </Section>
+        </SettingsSection>
       </ScrollView>
     </PageContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 12,
-    alignItems: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 4,
-    backgroundColor: '#FFF',
-    borderRadius: 10,
-    padding: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontFamily: STYLES.fonts.bold,
-    color: STYLES.colors.black[800],
-  },
-
   scrollView: {
     flex: 1,
   },
@@ -245,76 +118,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 4,
     padding: 16,
-  },
-  section: {
-    marginBottom: 4,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontFamily: STYLES.fonts.medium,
-    marginBottom: 4,
-    paddingLeft: 4,
-  },
-  sectionContent: {
-    backgroundColor: '#FFF',
-    borderRadius: 12,
-    overflow: 'hidden',
-  },
-  profileInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  profileTextContainer: {
-    marginLeft: 10,
-  },
-  profileName: {
-    fontSize: 14,
-    fontFamily: STYLES.fonts.semi_bold,
-  },
-  profileEmail: {
-    fontSize: 14,
-    color: STYLES.colors.black[500],
-    marginTop: 2,
-    fontFamily: STYLES.fonts.regular,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: STYLES.colors.black[50],
-  },
-  menuItemLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  iconContainer: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: STYLES.colors.blue[50],
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  menuItemTextContainer: {
-    marginLeft: 16,
-  },
-  menuItemTitle: {
-    fontSize: 14,
-    fontFamily: STYLES.fonts.semi_bold,
-    color: STYLES.colors.black[700],
-  },
-  menuItemSubtitle: {
-    fontSize: 12,
-    color: STYLES.colors.black[500],
-    marginTop: 2,
-    fontFamily: STYLES.fonts.regular,
-  },
-  arrowIcon: {
-    fontSize: 24,
-    color: STYLES.colors.black[300],
   },
 });

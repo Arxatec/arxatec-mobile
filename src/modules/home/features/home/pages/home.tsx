@@ -2,142 +2,30 @@ import {PageContainer} from '@/components/layout';
 import {Cases, Community, Home as HomeRoutes} from '@/navigation/routes.ts';
 import {STYLES} from '@/utils';
 import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import {CustomAvatar} from '@/components/atoms/custom_avatar';
-import {
-  BellIcon,
-  Cog6ToothIcon,
-  UsersIcon,
-  FolderPlusIcon,
-  FolderOpenIcon,
-  ArrowUpRightIcon,
-  CalendarIcon,
   SparklesIcon,
+  FolderPlusIcon,
+  CalendarIcon,
   GlobeAltIcon,
   ChatBubbleLeftRightIcon,
-  EllipsisVerticalIcon,
-  FolderIcon,
 } from 'react-native-heroicons/solid';
 import {useState} from 'react';
 import {useAppNavigation} from '@/hooks';
-
-interface TabItem {
-  id: TabId;
-  label: string;
-}
-
-type TabId = 'clients' | 'earnings' | 'closed' | 'visits';
-
-interface CardData {
-  title: string;
-  amount: string;
-  update: string;
-  button: string;
-}
-
-type CardDataMap = {
-  [key in TabId]: CardData;
-};
-
-interface Meeting {
-  id: string;
-  date: string;
-  time: string;
-  title: string;
-  location: string;
-}
-
-const casesList = [
-  {
-    id: 1,
-    title: 'Asesoramiento en derecho laboral',
-    client: 'Maria Lopez',
-    date: '20/10/2025',
-    status: 'active',
-  },
-  {
-    id: 2,
-    title: 'Demanda por incumplimiento de contrato',
-    client: 'Juan Pérez',
-    date: '18/10/2025',
-    status: 'pending',
-  },
-  {
-    id: 3,
-    title: 'Reclamo por servicios profesionales',
-    client: 'Ana Martínez',
-    date: '15/10/2025',
-    status: 'active',
-  },
-  {
-    id: 4,
-    title: 'Asesoría en propiedad intelectual',
-    client: 'Carlos Rodríguez',
-    date: '12/10/2025',
-    status: 'completed',
-  },
-  {
-    id: 5,
-    title: 'Defensa en caso de accidente laboral',
-    client: 'Laura Sánchez',
-    date: '10/10/2025',
-    status: 'active',
-  },
-  {
-    id: 6,
-    title: 'Mediación en conflicto comercial',
-    client: 'Roberto García',
-    date: '08/10/2025',
-    status: 'pending',
-  },
-  {
-    id: 7,
-    title: 'Asesoramiento en derecho de familia',
-    client: 'Sofía Torres',
-    date: '05/10/2025',
-    status: 'active',
-  },
-  {
-    id: 8,
-    title: 'Reclamo por daños y perjuicios',
-    client: 'Miguel Ángel Ruiz',
-    date: '03/10/2025',
-    status: 'completed',
-  },
-  {
-    id: 9,
-    title: 'Reclamo por daños y perjuicios',
-    client: 'Miguel Ángel Ruiz',
-    date: '03/10/2025',
-    status: 'completed',
-  },
-  {
-    id: 10,
-    title: 'Reclamo por daños y perjuicios',
-    client: 'Miguel Ángel Ruiz',
-    date: '03/10/2025',
-    status: 'completed',
-  },
-  {
-    id: 11,
-    title: 'Reclamo por daños y perjuicios',
-    client: 'Miguel Ángel Ruiz',
-    date: '03/10/2025',
-    status: 'completed',
-  },
-  {
-    id: 12,
-    title: 'Reclamo por daños y perjuicios',
-    client: 'Miguel Ángel Ruiz',
-    date: '03/10/2025',
-    status: 'completed',
-  },
-];
+import {
+  HeaderSection,
+  StatsSection,
+  MeetingsSection,
+  CasesSection,
+  ActionOptionsSection,
+} from '../components/organisms';
+import {
+  TabId,
+  TabItem,
+  CardDataMap,
+  Meeting,
+  CaseItem,
+  ActionOption,
+} from '../types';
+import {ScrollView} from 'react-native';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>('earnings');
@@ -146,7 +34,7 @@ export default function Home() {
   const navigateToSettings = () => navigateTo(HomeRoutes.Settings);
   const navigateToNotification = () => navigateTo(HomeRoutes.Notification);
 
-  const caseOptions = [
+  const caseOptions: ActionOption[] = [
     {
       id: 3,
       title: 'Asistente virtual',
@@ -277,433 +165,111 @@ export default function Home() {
     },
   ];
 
+  const casesList: CaseItem[] = [
+    {
+      id: 1,
+      title: 'Asesoramiento en derecho laboral',
+      client: 'Maria Lopez',
+      date: '20/10/2025',
+      status: 'active',
+    },
+    {
+      id: 2,
+      title: 'Demanda por incumplimiento de contrato',
+      client: 'Juan Pérez',
+      date: '18/10/2025',
+      status: 'pending',
+    },
+    {
+      id: 3,
+      title: 'Reclamo por servicios profesionales',
+      client: 'Ana Martínez',
+      date: '15/10/2025',
+      status: 'active',
+    },
+    {
+      id: 4,
+      title: 'Asesoría en propiedad intelectual',
+      client: 'Carlos Rodríguez',
+      date: '12/10/2025',
+      status: 'completed',
+    },
+    {
+      id: 5,
+      title: 'Defensa en caso de accidente laboral',
+      client: 'Laura Sánchez',
+      date: '10/10/2025',
+      status: 'active',
+    },
+    {
+      id: 6,
+      title: 'Mediación en conflicto comercial',
+      client: 'Roberto García',
+      date: '08/10/2025',
+      status: 'pending',
+    },
+    {
+      id: 7,
+      title: 'Asesoramiento en derecho de familia',
+      client: 'Sofía Torres',
+      date: '05/10/2025',
+      status: 'active',
+    },
+    {
+      id: 8,
+      title: 'Reclamo por daños y perjuicios',
+      client: 'Miguel Ángel Ruiz',
+      date: '03/10/2025',
+      status: 'completed',
+    },
+  ];
+
+  const handleTabChange = (tabId: TabId) => {
+    setActiveTab(tabId);
+  };
+
+  const handleCasePress = () => {
+    navigateTo(Cases.ViewCase);
+  };
+
+  const handleSeeAllPress = () => {
+    // Implementar navegación a la vista de todos los casos/reuniones
+  };
+
   return (
     <PageContainer
       paddingHorizontal={0}
       statusBarBackground={STYLES.colors.white[1]}
+      scrollEnabled={false}
       translucent={false}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.headerLeft}>
-            <CustomAvatar
-              avatar="https://randomuser.me/api/portraits/men/32.jpg"
-              size={40}
-              username="Amirnov"
-            />
-            <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeText}>Hola, Bienvenido</Text>
-              <Text style={styles.username}>Rafael</Text>
-            </View>
-          </View>
-          <View style={styles.headerRight}>
-            <TouchableOpacity
-              style={styles.iconButton}
-              onPress={navigateToSettings}>
-              <Cog6ToothIcon size={18} color={STYLES.colors.black[500]} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.iconButton}
-              onPress={navigateToNotification}>
-              <BellIcon size={18} color={STYLES.colors.black[500]} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollViewContent}>
-        {caseOptions.map(option => (
-          <TouchableOpacity
-            key={option.id}
-            style={styles.option}
-            onPress={option.action}>
-            <View>
-              <View
-                style={[
-                  styles.optionIconContainer,
-                  {backgroundColor: option.color},
-                ]}>
-                <option.icon color="#FFF" size={20} />
-              </View>
-              <Text style={styles.optionText}>{option.title}</Text>
-            </View>
-            <ArrowUpRightIcon
-              size={16}
-              color={STYLES.colors.black[500]}
-              strokeWidth={2}
-            />
-          </TouchableOpacity>
-        ))}
+      <HeaderSection
+        username="Rafael"
+        avatarUrl="https://randomuser.me/api/portraits/men/32.jpg"
+        onSettingsPress={navigateToSettings}
+        onNotificationPress={navigateToNotification}
+      />
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <ActionOptionsSection options={caseOptions} />
+
+        <StatsSection
+          tabs={tabs}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          cardData={cardData}
+        />
+
+        <MeetingsSection
+          meetings={upcomingMeetings}
+          onSeeAllPress={handleSeeAllPress}
+        />
+
+        <CasesSection
+          cases={casesList}
+          onCasePress={handleCasePress}
+          onSeeAllPress={handleSeeAllPress}
+        />
       </ScrollView>
-      <View style={[styles.container, {marginTop: 4}]}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.dashboardTitle}>Estadisticas</Text>
-
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.tabsScrollContent}>
-            {tabs.map(tab => (
-              <TouchableOpacity
-                key={tab.id}
-                style={[
-                  styles.tabButton,
-                  activeTab === tab.id && styles.activeTabButton,
-                ]}
-                onPress={() => setActiveTab(tab.id)}>
-                <Text
-                  style={[
-                    styles.tabButtonText,
-                    activeTab === tab.id && styles.activeTabButtonText,
-                  ]}>
-                  {tab.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-      </View>
-      <View style={styles.container}>
-        <View style={styles.paymentCard}>
-          <Text style={styles.paymentCardTitle}>
-            {cardData[activeTab].title}
-          </Text>
-          <Text style={styles.paymentAmount}>{cardData[activeTab].amount}</Text>
-          <Text style={styles.updateText}>{cardData[activeTab].update}</Text>
-
-          <TouchableOpacity style={styles.viewPricingButton}>
-            <Text style={styles.viewPricingText}>
-              {cardData[activeTab].button}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <View style={styles.meetingsContainer}>
-        <View style={styles.container}>
-          <View style={styles.meetingsSectionHeader}>
-            <Text style={styles.sectionTitle}>Eventos de hoy</Text>
-            <TouchableOpacity>
-              <Text style={styles.seeAllText}>Mirar todos</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{paddingHorizontal: 16}}>
-          {upcomingMeetings.map(meeting => (
-            <View key={meeting.id} style={styles.meetingCard}>
-              <View style={styles.meetingDateContainer}>
-                <Text style={styles.meetingDate}>
-                  {meeting.date} • {meeting.time}
-                </Text>
-              </View>
-              <Text style={styles.meetingTitle}>{meeting.title}</Text>
-              <Text style={styles.meetingLocation}>{meeting.location}</Text>
-              <Text style={styles.meetingLocation}>ID #{meeting.id}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      </View>
-
-      <View style={styles.container}>
-        <View
-          style={{
-            backgroundColor: '#FFF',
-            borderRadius: 16,
-            padding: 16,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text style={styles.sectionTitle}>Tus casos recientes</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAllText}>Mirar todos</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={{paddingHorizontal: 16}}>
-        {casesList.map(caseItem => (
-          <TouchableOpacity
-            key={caseItem.id}
-            onPress={() => navigateTo(Cases.ViewCase)}
-            style={styles.caseItemContainer}>
-            <View style={styles.caseItem}>
-              <View style={styles.caseItemContent}>
-                <View style={styles.caseIconContainer}>
-                  <FolderIcon
-                    size={20}
-                    color={STYLES.colors.blue[600]}
-                    strokeWidth={2}
-                  />
-                </View>
-                <View style={styles.caseInfo}>
-                  <Text style={styles.caseTitle}>{caseItem.title}</Text>
-                  <View style={styles.caseMetaInfo}>
-                    <Text style={styles.caseMetaText}>{caseItem.client}</Text>
-                    <View style={styles.metaDot}></View>
-                    <Text style={styles.caseMetaText}>{caseItem.date}</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
     </PageContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-  },
-  titleContainer: {
-    backgroundColor: '#FFF',
-    paddingVertical: 12,
-    borderRadius: 10,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    backgroundColor: '#FFF',
-    borderRadius: 10,
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  welcomeContainer: {
-    marginLeft: 12,
-  },
-  welcomeText: {
-    fontSize: 14,
-    color: STYLES.colors.black[700],
-    fontFamily: STYLES.fonts.medium,
-  },
-  username: {
-    fontSize: 16,
-    color: STYLES.colors.black[900],
-    fontFamily: STYLES.fonts.semi_bold,
-  },
-  headerRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: STYLES.colors.white[1],
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 8,
-    borderWidth: 1,
-    borderColor: STYLES.colors.black[100],
-  },
-
-  dashboardTitle: {
-    paddingHorizontal: 16,
-    fontSize: 18,
-    fontFamily: STYLES.fonts.bold,
-    color: STYLES.colors.black[900],
-    marginBottom: 16,
-  },
-  tabsScrollContent: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-  },
-  tabButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 7,
-    marginRight: 8,
-  },
-  activeTabButton: {
-    backgroundColor: STYLES.colors.blue[100],
-  },
-  tabButtonText: {
-    fontSize: 14,
-    fontFamily: STYLES.fonts.medium,
-    color: STYLES.colors.black[600],
-  },
-  activeTabButtonText: {
-    color: STYLES.colors.blue[600],
-  },
-  paymentCard: {
-    backgroundColor: STYLES.colors.blue[600],
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 4,
-  },
-  paymentCardTitle: {
-    fontSize: 14,
-    fontFamily: STYLES.fonts.medium,
-    color: STYLES.colors.white[1],
-    opacity: 0.8,
-  },
-  paymentAmount: {
-    fontSize: 28,
-    fontFamily: STYLES.fonts.bold,
-    color: STYLES.colors.white[1],
-    marginTop: 4,
-  },
-  updateText: {
-    fontSize: 12,
-    fontFamily: STYLES.fonts.regular,
-    color: STYLES.colors.white[1],
-    opacity: 0.7,
-    marginTop: 2,
-  },
-  viewPricingButton: {
-    marginTop: 16,
-    backgroundColor: STYLES.colors.white[1],
-    borderRadius: 8,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  viewPricingText: {
-    fontSize: 14,
-    fontFamily: STYLES.fonts.semi_bold,
-    color: STYLES.colors.black[900],
-  },
-  meetingsContainer: {
-    marginBottom: 4,
-    marginTop: 4,
-  },
-  meetingsSectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-    marginBottom: 4,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontFamily: STYLES.fonts.bold,
-    color: STYLES.colors.black[900],
-  },
-  seeAllText: {
-    fontSize: 14,
-    fontFamily: STYLES.fonts.medium,
-    color: STYLES.colors.black[500],
-  },
-  meetingCard: {
-    backgroundColor: '#FFF',
-    borderRadius: 8,
-    padding: 16,
-    marginRight: 4,
-    width: 250,
-  },
-  meetingDateContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  meetingDate: {
-    fontSize: 12,
-    fontFamily: STYLES.fonts.medium,
-    color: STYLES.colors.black[500],
-  },
-  expandButton: {
-    padding: 4,
-  },
-  meetingTitle: {
-    fontSize: 16,
-    fontFamily: STYLES.fonts.bold,
-    color: STYLES.colors.black[900],
-    marginBottom: 4,
-  },
-  meetingLocation: {
-    fontSize: 14,
-    fontFamily: STYLES.fonts.regular,
-    color: STYLES.colors.black[500],
-    marginTop: 4,
-  },
-  scrollViewContent: {
-    paddingHorizontal: 16,
-    flexDirection: 'row',
-    gap: 6,
-    alignSelf: 'flex-start',
-    marginTop: 4,
-  },
-  option: {
-    backgroundColor: '#FFF',
-    borderRadius: 8,
-    padding: 16,
-    width: 250,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    flexShrink: 1,
-  },
-  optionIconContainer: {
-    width: 40,
-    height: 40,
-    backgroundColor: STYLES.colors.blue[600],
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 8,
-  },
-  optionText: {
-    fontFamily: STYLES.fonts.semi_bold,
-    color: STYLES.colors.black[900],
-    fontSize: 14,
-    marginTop: 8,
-  },
-  caseItemContainer: {
-    marginTop: 4,
-  },
-  caseItem: {
-    borderRadius: 10,
-    backgroundColor: '#FFF',
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  caseItemContent: {
-    flexDirection: 'row',
-  },
-  caseIconContainer: {
-    backgroundColor: STYLES.colors.blue[50],
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 40,
-    height: 40,
-    borderRadius: 8,
-  },
-  caseInfo: {
-    marginLeft: 8,
-  },
-  caseTitle: {
-    fontFamily: STYLES.fonts.semi_bold,
-    fontSize: 14,
-    color: STYLES.colors.black[900],
-  },
-  caseMetaInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  caseMetaText: {
-    fontFamily: STYLES.fonts.regular,
-    fontSize: 14,
-    color: STYLES.colors.black[600],
-  },
-  metaDot: {
-    width: 5,
-    height: 5,
-    backgroundColor: STYLES.colors.black[400],
-    borderRadius: 200,
-  },
-});
