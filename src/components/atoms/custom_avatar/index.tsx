@@ -80,33 +80,40 @@ export const CustomAvatar: React.FC<Props> = ({
     outputRange: [STYLES.colors.black[200], STYLES.colors.black[100]],
   });
 
+  const containerStyle = {
+    width: size,
+    height: size,
+  };
+
+  const circleStyle = {
+    width: size,
+    height: size,
+    borderRadius: size / 2,
+  };
+
+  const loadingStyle = {
+    ...circleStyle,
+    backgroundColor: interpolatedBackground,
+  };
+
+  const initialsContainerStyle = {
+    ...circleStyle,
+    backgroundColor: avatarColor,
+  };
+
+  const avatarStyle = {
+    ...circleStyle,
+    opacity: isLoading ? 0 : 1,
+  };
+
   return (
-    <View style={{width: size, height: size, position: 'relative'}}>
+    <View style={[styles.container, containerStyle]}>
       {isLoading && (
-        <Animated.View
-          style={[
-            styles.loadingContainer,
-            {
-              width: size,
-              height: size,
-              borderRadius: size / 2,
-              backgroundColor: interpolatedBackground,
-            },
-          ]}
-        />
+        <Animated.View style={[styles.loadingContainer, loadingStyle]} />
       )}
 
       {hasError ? (
-        <View
-          style={[
-            styles.initialsContainer,
-            {
-              width: size,
-              height: size,
-              borderRadius: size / 2,
-              backgroundColor: avatarColor,
-            },
-          ]}>
+        <View style={[styles.initialsContainer, initialsContainerStyle]}>
           <Text style={styles.initialsText}>{initials}</Text>
         </View>
       ) : (
@@ -115,15 +122,7 @@ export const CustomAvatar: React.FC<Props> = ({
           accessibilityLabel={altText}
           onLoad={handleImageLoad}
           onError={handleImageError}
-          style={[
-            styles.avatar,
-            {
-              width: size,
-              height: size,
-              borderRadius: size / 2,
-              opacity: isLoading ? 0 : 1,
-            },
-          ]}
+          style={[styles.avatar, avatarStyle]}
         />
       )}
     </View>
@@ -131,6 +130,9 @@ export const CustomAvatar: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+  },
   avatar: {
     resizeMode: 'cover',
   },

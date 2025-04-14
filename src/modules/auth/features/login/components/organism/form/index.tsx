@@ -26,7 +26,7 @@ export const Form = () => {
 
   return (
     <View>
-      <View style={style.containerForm}>
+      <View style={styles.containerForm}>
         <CustomInput
           label="Correo electrónico:"
           placeholder="Ej. email@email.com"
@@ -34,7 +34,7 @@ export const Form = () => {
           autoComplete="email"
         />
 
-        <View style={style.inputSeparator}>
+        <View style={styles.inputSeparator}>
           <CustomInput
             label="Contraseña: "
             placeholder="Ej. BawW235gS#"
@@ -43,21 +43,21 @@ export const Form = () => {
             isPassword={true}
           />
         </View>
-        <View style={{flex: 1, alignItems: 'flex-end', marginTop: 16}}>
+        <View style={styles.forgotPasswordContainer}>
           <TouchableOpacity onPress={navigateToForgotPassword}>
-            <Text style={style.buttonLinkText}>¿Olvidaste tu contraseña?</Text>
+            <Text style={styles.buttonLinkText}>¿Olvidaste tu contraseña?</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      <View style={style.containerActions}>
+      <View style={styles.containerActions}>
         <View>
           <PrimaryButton title="Ingresar" onPress={handleLogin} />
         </View>
 
         <AccountInquiry
-          text={'No tienes cuenta?'}
-          buttonText={'Crear cuenta'}
+          text="¿No tienes cuenta?"
+          buttonText="Crear cuenta"
           action={navigateToRegister}
         />
       </View>
@@ -65,31 +65,31 @@ export const Form = () => {
   );
 };
 
-const style = StyleSheet.create({
-  container: {
-    paddingHorizontal: 32,
-    marginTop: 40,
-  },
-  containerActions: {
+const styles = StyleSheet.create({
+  containerForm: {
     marginTop: 4,
     backgroundColor: '#FFF',
-    borderRadius: 8,
     padding: 16,
+    borderRadius: 8,
   },
   inputSeparator: {
     marginTop: 16,
   },
-
-  containerForm: {
-    marginTop: 4,
-    backgroundColor: '#FFF',
-    borderRadius: 8,
-    padding: 16,
+  forgotPasswordContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+    marginTop: 16,
   },
   buttonLinkText: {
-    fontSize: 14,
-    color: STYLES.colors.blue[600],
+    fontSize: 12,
+    color: STYLES.colors.blue[500],
     fontFamily: STYLES.fonts.regular,
     textAlign: 'center',
+  },
+  containerActions: {
+    marginTop: 4,
+    backgroundColor: '#FFF',
+    padding: 16,
+    borderRadius: 8,
   },
 });

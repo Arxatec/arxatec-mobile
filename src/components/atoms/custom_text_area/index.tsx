@@ -27,8 +27,10 @@ export const CustomTextArea: React.FC<Props> = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleTogglePassword = () => setShowPassword(!showPassword);
+
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.wrapper}>
       {label && <Text style={styles.labelInput}>{label}</Text>}
       <View style={[styles.container, style]}>
         {startAdornment && (
@@ -36,7 +38,7 @@ export const CustomTextArea: React.FC<Props> = ({
         )}
 
         <TextInput
-          style={[styles.input]}
+          style={styles.input}
           secureTextEntry={isPassword && !showPassword}
           placeholderTextColor={STYLES.colors.black[400]}
           cursorColor={STYLES.colors.blue[500]}
@@ -50,7 +52,7 @@ export const CustomTextArea: React.FC<Props> = ({
         {isPassword && (
           <TouchableOpacity
             style={styles.showPassword}
-            onPress={() => setShowPassword(!showPassword)}>
+            onPress={handleTogglePassword}>
             {showPassword ? (
               <EyeIcon size={14} color={STYLES.colors.black[400]} />
             ) : (
@@ -68,6 +70,9 @@ export const CustomTextArea: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
   labelInput: {
     color: STYLES.colors.black[600],
     fontFamily: STYLES.fonts.medium,

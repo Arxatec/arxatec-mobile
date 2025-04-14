@@ -1,4 +1,4 @@
-import {CustomInput} from '@/components/atoms';
+import {CustomDropdown, CustomInput} from '@/components/atoms';
 import {PageContainer} from '@/components/layout';
 import {useAppNavigation} from '@/hooks';
 import {Cases} from '@/navigation/routes';
@@ -130,6 +130,13 @@ export default function ExplorerCases() {
   const {navigateTo} = useAppNavigation();
   const [activeTab, setActiveTab] = useState<TabId>('all');
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedType, setSelectedType] = useState('');
+  const types = [
+    {label: 'Caso', value: 'case'},
+    {label: 'Consulta', value: 'question'},
+    {label: 'Asesoría', value: 'advice'},
+  ];
+
   const handleOptionSelected = (option: string) => {
     setModalVisible(false);
   };
@@ -147,55 +154,69 @@ export default function ExplorerCases() {
         </View>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View>
-          <View style={styles.searchBox}>
-            <View style={{paddingHorizontal: 16, paddingTop: 16}}>
-              <View style={styles.inputContainer}>
-                <CustomInput
-                  startAdornment={
-                    <MagnifyingGlassIcon
-                      size={18}
-                      color={STYLES.colors.black[400]}
-                    />
-                  }
-                  placeholder="Buscar..."
-                />
-              </View>
-              <View style={[styles.inputContainer, {marginTop: 4}]}>
-                <CustomInput
-                  startAdornment={
-                    <MapPinIcon size={18} color={STYLES.colors.black[400]} />
-                  }
-                  placeholder="Ubicación"
-                />
-              </View>
+      <View style={styles.searchBox}>
+        <View style={{paddingHorizontal: 16, paddingTop: 16}}>
+          <View style={{flexDirection: 'row', gap: 8}}>
+            <View style={{flex: 1}}>
+              <CustomInput
+                startAdornment={
+                  <MagnifyingGlassIcon
+                    size={18}
+                    color={STYLES.colors.black[400]}
+                  />
+                }
+                placeholder="Buscar..."
+              />
             </View>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.tabsScrollContent}>
-              {tabs.map(tab => (
-                <TouchableOpacity
-                  key={tab.id}
-                  style={[
-                    styles.tabButton,
-                    activeTab === tab.id && styles.activeTabButton,
-                  ]}
-                  onPress={() => setActiveTab(tab.id)}>
-                  <Text
-                    style={[
-                      styles.tabButtonText,
-                      activeTab === tab.id && styles.activeTabButtonText,
-                    ]}>
-                    {tab.label}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
+            <View style={{flex: 1}}>
+              <CustomDropdown
+                data={types}
+                value={selectedType}
+                onChange={setSelectedType}
+                placeholder="Tipo de caso"
+              />
+            </View>
+          </View>
+
+          <View style={[styles.inputContainer, {marginTop: 4}]}>
+            <CustomInput
+              startAdornment={
+                <MapPinIcon size={18} color={STYLES.colors.black[400]} />
+              }
+              placeholder="Ubicación"
+            />
           </View>
         </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.tabsScrollContent}>
+          {tabs.map(tab => (
+            <TouchableOpacity
+              key={tab.id}
+              style={[
+                styles.tabButton,
+                activeTab === tab.id && styles.activeTabButton,
+              ]}
+              onPress={() => setActiveTab(tab.id)}>
+              <Text
+                style={[
+                  styles.tabButtonText,
+                  activeTab === tab.id && styles.activeTabButtonText,
+                ]}>
+                {tab.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
 
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          borderRadius: 16,
+          overflow: 'hidden',
+        }}>
         <View>
           {casesList.map(caseItem => (
             <TouchableOpacity
@@ -286,6 +307,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#FFF',
     paddingBottom: 16,
+    marginBottom: 4,
   },
   inputContainer: {
     height: 43,
@@ -314,7 +336,7 @@ const styles = StyleSheet.create({
   },
 
   caseItemContainer: {
-    marginTop: 4,
+    marginBottom: 4,
   },
   caseItem: {
     borderRadius: 10,

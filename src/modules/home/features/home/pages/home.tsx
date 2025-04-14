@@ -1,5 +1,5 @@
 import {PageContainer} from '@/components/layout';
-import {Home as HomeRoutes} from '@/navigation/routes.ts';
+import {Cases, Community, Home as HomeRoutes} from '@/navigation/routes.ts';
 import {STYLES} from '@/utils';
 import {
   Text,
@@ -9,7 +9,20 @@ import {
   ScrollView,
 } from 'react-native';
 import {CustomAvatar} from '@/components/atoms/custom_avatar';
-import {BellIcon, Cog6ToothIcon} from 'react-native-heroicons/solid';
+import {
+  BellIcon,
+  Cog6ToothIcon,
+  UsersIcon,
+  FolderPlusIcon,
+  FolderOpenIcon,
+  ArrowUpRightIcon,
+  CalendarIcon,
+  SparklesIcon,
+  GlobeAltIcon,
+  ChatBubbleLeftRightIcon,
+  EllipsisVerticalIcon,
+  FolderIcon,
+} from 'react-native-heroicons/solid';
 import {useState} from 'react';
 import {useAppNavigation} from '@/hooks';
 
@@ -39,12 +52,137 @@ interface Meeting {
   location: string;
 }
 
+const casesList = [
+  {
+    id: 1,
+    title: 'Asesoramiento en derecho laboral',
+    client: 'Maria Lopez',
+    date: '20/10/2025',
+    status: 'active',
+  },
+  {
+    id: 2,
+    title: 'Demanda por incumplimiento de contrato',
+    client: 'Juan Pérez',
+    date: '18/10/2025',
+    status: 'pending',
+  },
+  {
+    id: 3,
+    title: 'Reclamo por servicios profesionales',
+    client: 'Ana Martínez',
+    date: '15/10/2025',
+    status: 'active',
+  },
+  {
+    id: 4,
+    title: 'Asesoría en propiedad intelectual',
+    client: 'Carlos Rodríguez',
+    date: '12/10/2025',
+    status: 'completed',
+  },
+  {
+    id: 5,
+    title: 'Defensa en caso de accidente laboral',
+    client: 'Laura Sánchez',
+    date: '10/10/2025',
+    status: 'active',
+  },
+  {
+    id: 6,
+    title: 'Mediación en conflicto comercial',
+    client: 'Roberto García',
+    date: '08/10/2025',
+    status: 'pending',
+  },
+  {
+    id: 7,
+    title: 'Asesoramiento en derecho de familia',
+    client: 'Sofía Torres',
+    date: '05/10/2025',
+    status: 'active',
+  },
+  {
+    id: 8,
+    title: 'Reclamo por daños y perjuicios',
+    client: 'Miguel Ángel Ruiz',
+    date: '03/10/2025',
+    status: 'completed',
+  },
+  {
+    id: 9,
+    title: 'Reclamo por daños y perjuicios',
+    client: 'Miguel Ángel Ruiz',
+    date: '03/10/2025',
+    status: 'completed',
+  },
+  {
+    id: 10,
+    title: 'Reclamo por daños y perjuicios',
+    client: 'Miguel Ángel Ruiz',
+    date: '03/10/2025',
+    status: 'completed',
+  },
+  {
+    id: 11,
+    title: 'Reclamo por daños y perjuicios',
+    client: 'Miguel Ángel Ruiz',
+    date: '03/10/2025',
+    status: 'completed',
+  },
+  {
+    id: 12,
+    title: 'Reclamo por daños y perjuicios',
+    client: 'Miguel Ángel Ruiz',
+    date: '03/10/2025',
+    status: 'completed',
+  },
+];
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>('earnings');
   const {navigateTo} = useAppNavigation();
 
   const navigateToSettings = () => navigateTo(HomeRoutes.Settings);
   const navigateToNotification = () => navigateTo(HomeRoutes.Notification);
+
+  const caseOptions = [
+    {
+      id: 3,
+      title: 'Asistente virtual',
+      icon: SparklesIcon,
+      color: STYLES.colors.sky[500],
+      action: () => navigateTo(Cases.ViewClients),
+    },
+    {
+      id: 2,
+      title: 'Crear caso',
+      icon: FolderPlusIcon,
+      color: STYLES.colors.cyan[500],
+      action: () => navigateTo(Cases.ExplorerCases),
+    },
+    {
+      id: 5,
+      title: 'Chatear con cliente',
+      icon: ChatBubbleLeftRightIcon,
+      color: STYLES.colors.blue[600],
+      action: () => navigateTo(Community.ViewPosts),
+    },
+    {
+      id: 1,
+      title: 'Agendar reunión',
+      icon: CalendarIcon,
+      color: STYLES.colors.emerald[500],
+      action: () => navigateTo(Cases.CreateCase),
+    },
+    {
+      id: 4,
+      title: 'Crear post',
+      icon: GlobeAltIcon,
+      color: STYLES.colors.teal[500],
+      action: () => navigateTo(Community.CreatePost),
+    },
+  ];
 
   const tabs: TabItem[] = [
     {id: 'earnings', label: 'Ganancias'},
@@ -171,6 +309,33 @@ export default function Home() {
           </View>
         </View>
       </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollViewContent}>
+        {caseOptions.map(option => (
+          <TouchableOpacity
+            key={option.id}
+            style={styles.option}
+            onPress={option.action}>
+            <View>
+              <View
+                style={[
+                  styles.optionIconContainer,
+                  {backgroundColor: option.color},
+                ]}>
+                <option.icon color="#FFF" size={20} />
+              </View>
+              <Text style={styles.optionText}>{option.title}</Text>
+            </View>
+            <ArrowUpRightIcon
+              size={16}
+              color={STYLES.colors.black[500]}
+              strokeWidth={2}
+            />
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
       <View style={[styles.container, {marginTop: 4}]}>
         <View style={styles.titleContainer}>
           <Text style={styles.dashboardTitle}>Estadisticas</Text>
@@ -242,6 +407,50 @@ export default function Home() {
             </View>
           ))}
         </ScrollView>
+      </View>
+
+      <View style={styles.container}>
+        <View
+          style={{
+            backgroundColor: '#FFF',
+            borderRadius: 16,
+            padding: 16,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={styles.sectionTitle}>Tus casos recientes</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAllText}>Mirar todos</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={{paddingHorizontal: 16}}>
+        {casesList.map(caseItem => (
+          <TouchableOpacity
+            key={caseItem.id}
+            onPress={() => navigateTo(Cases.ViewCase)}
+            style={styles.caseItemContainer}>
+            <View style={styles.caseItem}>
+              <View style={styles.caseItemContent}>
+                <View style={styles.caseIconContainer}>
+                  <FolderIcon
+                    size={20}
+                    color={STYLES.colors.blue[600]}
+                    strokeWidth={2}
+                  />
+                </View>
+                <View style={styles.caseInfo}>
+                  <Text style={styles.caseTitle}>{caseItem.title}</Text>
+                  <View style={styles.caseMetaInfo}>
+                    <Text style={styles.caseMetaText}>{caseItem.client}</Text>
+                    <View style={styles.metaDot}></View>
+                    <Text style={styles.caseMetaText}>{caseItem.date}</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
     </PageContainer>
   );
@@ -419,5 +628,82 @@ const styles = StyleSheet.create({
     fontFamily: STYLES.fonts.regular,
     color: STYLES.colors.black[500],
     marginTop: 4,
+  },
+  scrollViewContent: {
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+    gap: 6,
+    alignSelf: 'flex-start',
+    marginTop: 4,
+  },
+  option: {
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    padding: 16,
+    width: 250,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    flexShrink: 1,
+  },
+  optionIconContainer: {
+    width: 40,
+    height: 40,
+    backgroundColor: STYLES.colors.blue[600],
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+  },
+  optionText: {
+    fontFamily: STYLES.fonts.semi_bold,
+    color: STYLES.colors.black[900],
+    fontSize: 14,
+    marginTop: 8,
+  },
+  caseItemContainer: {
+    marginTop: 4,
+  },
+  caseItem: {
+    borderRadius: 10,
+    backgroundColor: '#FFF',
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  caseItemContent: {
+    flexDirection: 'row',
+  },
+  caseIconContainer: {
+    backgroundColor: STYLES.colors.blue[50],
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+  },
+  caseInfo: {
+    marginLeft: 8,
+  },
+  caseTitle: {
+    fontFamily: STYLES.fonts.semi_bold,
+    fontSize: 14,
+    color: STYLES.colors.black[900],
+  },
+  caseMetaInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  caseMetaText: {
+    fontFamily: STYLES.fonts.regular,
+    fontSize: 14,
+    color: STYLES.colors.black[600],
+  },
+  metaDot: {
+    width: 5,
+    height: 5,
+    backgroundColor: STYLES.colors.black[400],
+    borderRadius: 200,
   },
 });

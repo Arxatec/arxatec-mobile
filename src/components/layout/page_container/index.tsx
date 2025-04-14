@@ -25,6 +25,11 @@ export const PageContainer: React.FC<Props> = ({
   translucent = true,
   marginTop = 48,
 }) => {
+  const contentStyle = {
+    marginTop: translucent ? marginTop : 0,
+    paddingHorizontal: paddingHorizontal,
+  };
+
   return (
     <SafeAreaView style={styles.containerPage}>
       <StatusBar
@@ -34,23 +39,10 @@ export const PageContainer: React.FC<Props> = ({
       />
       {scrollEnabled ? (
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View
-            style={{
-              marginTop: translucent ? marginTop : 0,
-              paddingHorizontal: paddingHorizontal,
-            }}>
-            {children}
-          </View>
+          <View style={contentStyle}>{children}</View>
         </ScrollView>
       ) : (
-        <View
-          style={{
-            flex: 1,
-            marginTop: translucent ? marginTop : 0,
-            paddingHorizontal: paddingHorizontal,
-          }}>
-          {children}
-        </View>
+        <View style={[styles.contentContainer, contentStyle]}>{children}</View>
       )}
     </SafeAreaView>
   );
@@ -60,5 +52,8 @@ const styles = StyleSheet.create({
   containerPage: {
     flex: 1,
     backgroundColor: STYLES.colors.white[1],
+  },
+  contentContainer: {
+    flex: 1,
   },
 });

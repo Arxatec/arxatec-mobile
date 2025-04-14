@@ -8,17 +8,12 @@ import {StyleSheet, View} from 'react-native';
 export const Form = () => {
   const {navigateTo} = useAppNavigation();
   const navigateToLogin = () => navigateTo(Routes.Login);
+
   return (
     <View>
-      <View style={style.containerForm}>
-        <View
-          style={{
-            flexDirection: 'row',
-            flex: 1,
-            width: '100%',
-            gap: 16,
-          }}>
-          <View style={{flex: 1}}>
+      <View style={styles.containerForm}>
+        <View style={styles.rowContainer}>
+          <View style={styles.flex1}>
             <CustomInput
               label="Nombre:"
               placeholder="Ej. Jorge"
@@ -26,7 +21,7 @@ export const Form = () => {
               autoComplete="name"
             />
           </View>
-          <View style={{flex: 1}}>
+          <View style={styles.flex1}>
             <CustomInput
               label="Apellido:"
               placeholder="Ej. Perez"
@@ -35,7 +30,7 @@ export const Form = () => {
             />
           </View>
         </View>
-        <View style={style.inputSeparator}>
+        <View style={styles.inputSeparator}>
           <CustomInput
             label="Correo electrónico:"
             placeholder="Ej. email@email.com"
@@ -44,7 +39,7 @@ export const Form = () => {
           />
         </View>
 
-        <View style={style.inputSeparator}>
+        <View style={styles.inputSeparator}>
           <CustomInput
             label="Contraseña: "
             placeholder="Ej. BawW235gS#"
@@ -55,11 +50,11 @@ export const Form = () => {
         </View>
       </View>
 
-      <View style={style.containerActions}>
+      <View style={styles.containerActions}>
         <PrimaryButton title="Registrarse" />
         <AccountInquiry
-          text={'Ya tienes cuenta?'}
-          buttonText={'Iniciar sesión'}
+          text="¿Ya tienes cuenta?"
+          buttonText="Iniciar sesión"
           action={navigateToLogin}
         />
       </View>
@@ -67,7 +62,7 @@ export const Form = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 32,
     marginTop: 40,
@@ -95,5 +90,14 @@ const style = StyleSheet.create({
     backgroundColor: '#FFF',
     padding: 16,
     borderRadius: 8,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    width: '100%',
+    gap: 16,
+  },
+  flex1: {
+    flex: 1,
   },
 });

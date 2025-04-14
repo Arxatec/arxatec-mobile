@@ -6,16 +6,17 @@ interface Props {
   buttonText: string;
   action: () => void;
 }
+
 export const AccountInquiry: React.FC<Props> = ({action, buttonText, text}) => (
-  <View style={style.container}>
-    <Text style={style.text}>{text}</Text>
+  <View style={styles.container}>
+    <Text style={styles.text}>{text}</Text>
     <TouchableOpacity onPress={action}>
-      <Text style={style.buttonText}>{buttonText}</Text>
+      <Text style={styles.buttonText}>{buttonText}</Text>
     </TouchableOpacity>
   </View>
 );
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',

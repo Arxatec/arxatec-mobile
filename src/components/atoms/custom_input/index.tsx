@@ -27,8 +27,10 @@ export const CustomInput: React.FC<Props> = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleTogglePassword = () => setShowPassword(!showPassword);
+
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.wrapper}>
       {label && <Text style={styles.labelInput}>{label}</Text>}
       <View style={[styles.container, style]}>
         {startAdornment && (
@@ -36,7 +38,10 @@ export const CustomInput: React.FC<Props> = ({
         )}
 
         <TextInput
-          style={[styles.input, {paddingHorizontal: startAdornment ? 8 : 16}]}
+          style={[
+            styles.input,
+            startAdornment ? styles.inputWithAdornment : styles.inputNormal,
+          ]}
           secureTextEntry={isPassword && !showPassword}
           placeholderTextColor={STYLES.colors.black[400]}
           cursorColor={STYLES.colors.blue[500]}
@@ -47,7 +52,7 @@ export const CustomInput: React.FC<Props> = ({
         {isPassword && (
           <TouchableOpacity
             style={styles.showPassword}
-            onPress={() => setShowPassword(!showPassword)}>
+            onPress={handleTogglePassword}>
             {showPassword ? (
               <EyeIcon size={14} color={STYLES.colors.black[400]} />
             ) : (
@@ -65,6 +70,9 @@ export const CustomInput: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
   labelInput: {
     color: STYLES.colors.black[600],
     fontFamily: STYLES.fonts.medium,
@@ -84,6 +92,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: STYLES.colors.black[950],
     flex: 1,
+  },
+  inputWithAdornment: {
+    paddingHorizontal: 8,
+  },
+  inputNormal: {
+    paddingHorizontal: 16,
   },
   startAdornment: {
     justifyContent: 'center',

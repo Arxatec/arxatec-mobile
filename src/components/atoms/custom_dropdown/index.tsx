@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import {
   ChevronDownIcon,
@@ -17,10 +17,10 @@ interface CustomDropdownProps {
   data: DropdownItem[];
   value: string;
   onChange: (value: string) => void;
+  label?: string;
   placeholder?: string;
   labelField?: string;
   valueField?: string;
-  label?: string;
   search?: boolean;
 }
 
@@ -38,18 +38,8 @@ export const CustomDropdown = ({
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
       <Dropdown
-        containerStyle={{
-          backgroundColor: '#FFF',
-          borderRadius: 8,
-          shadowColor: '#FFF',
-          borderWidth: 1,
-          borderColor: STYLES.colors.black[100],
-        }}
-        itemTextStyle={{
-          fontFamily: STYLES.fonts.regular,
-          fontSize: 14,
-          color: STYLES.colors.black[600],
-        }}
+        containerStyle={styles.dropdownContainer}
+        itemTextStyle={styles.itemTextStyle}
         searchPlaceholder="Buscar..."
         searchPlaceholderTextColor={STYLES.colors.black[400]}
         search={search}
@@ -66,14 +56,8 @@ export const CustomDropdown = ({
         value={value}
         showsVerticalScrollIndicator={false}
         renderInputSearch={onSearch => (
-          <View
-            style={{
-              padding: 8,
-            }}>
-            <View
-              style={{
-                height: 45,
-              }}>
+          <View style={styles.searchContainer}>
+            <View style={styles.searchInputContainer}>
               <CustomInput
                 placeholder="Buscar..."
                 onChangeText={onSearch}
@@ -102,33 +86,50 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  dropdown: {
-    height: 42,
-    borderColor: STYLES.colors.black[200],
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    backgroundColor: '#FFF',
-  },
-  placeholderStyle: {
-    fontSize: 14,
-    color: STYLES.colors.black[400],
-    fontFamily: STYLES.fonts.regular,
-  },
-  selectedTextStyle: {
-    fontSize: 14,
-    color: STYLES.colors.black[800],
-    fontFamily: STYLES.fonts.medium,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-
   label: {
     color: STYLES.colors.black[600],
     fontFamily: STYLES.fonts.medium,
     fontSize: 14,
     marginBottom: 8,
+  },
+  dropdown: {
+    height: 45,
+    borderWidth: 1,
+    borderColor: STYLES.colors.black[200],
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    backgroundColor: '#FFF',
+  },
+  dropdownContainer: {
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    shadowColor: '#FFF',
+    borderWidth: 1,
+    borderColor: STYLES.colors.black[100],
+  },
+  itemTextStyle: {
+    fontFamily: STYLES.fonts.regular,
+    fontSize: 14,
+    color: STYLES.colors.black[600],
+  },
+  placeholderStyle: {
+    fontFamily: STYLES.fonts.regular,
+    fontSize: 14,
+    color: STYLES.colors.black[400],
+  },
+  selectedTextStyle: {
+    fontFamily: STYLES.fonts.regular,
+    fontSize: 14,
+    color: STYLES.colors.black[950],
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  searchContainer: {
+    padding: 8,
+  },
+  searchInputContainer: {
+    height: 45,
   },
 });
