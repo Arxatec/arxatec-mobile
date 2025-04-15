@@ -1,28 +1,25 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {STYLES} from '@/utils';
 
-export interface ChatUnreadIndicatorProps {
-  size?: number;
-  color?: string;
+interface ChatUnreadIndicatorProps {
+  seen: boolean;
 }
 
 export const ChatUnreadIndicator: React.FC<ChatUnreadIndicatorProps> = ({
-  size = 7,
-  color = STYLES.colors.blue[600],
+  seen,
 }) => {
+  if (seen) return null;
+
   return (
     <View
-      style={[
-        styles.unreadIndicator,
-        {width: size, height: size, backgroundColor: color},
-      ]}
+      style={{
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: STYLES.colors.blue[600],
+        marginLeft: 8,
+      }}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  unreadIndicator: {
-    borderRadius: 5,
-  },
-});

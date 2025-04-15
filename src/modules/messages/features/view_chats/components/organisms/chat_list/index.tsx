@@ -1,17 +1,9 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList} from 'react-native';
 import {ChatItem} from '../chat_item';
+import {Chat} from '../../../types';
 
-export interface Chat {
-  id: string;
-  name: string;
-  message: string;
-  time: string;
-  image: string;
-  seen: boolean;
-}
-
-export interface ChatListProps {
+interface ChatListProps {
   chats: Chat[];
   onChatPress?: (chatId: string) => void;
 }
@@ -30,5 +22,3 @@ export const ChatList: React.FC<ChatListProps> = ({chats, onChatPress}) => {
     />
   );
 };
-
-const styles = StyleSheet.create({});

@@ -1,9 +1,8 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {ChatTime} from '../../atoms/chat_time';
-import {ChatUnreadIndicator} from '../../atoms/chat_unread_indicator';
+import {View} from 'react-native';
+import {ChatTime, ChatUnreadIndicator} from '../../atoms';
 
-export interface ChatTimeIndicatorProps {
+interface ChatTimeIndicatorProps {
   time: string;
   seen: boolean;
 }
@@ -13,15 +12,13 @@ export const ChatTimeIndicator: React.FC<ChatTimeIndicatorProps> = ({
   seen,
 }) => {
   return (
-    <View style={styles.chatContainerTime}>
-      {!seen && <ChatUnreadIndicator />}
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}>
       <ChatTime time={time} />
+      <ChatUnreadIndicator seen={seen} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  chatContainerTime: {
-    alignItems: 'flex-end',
-  },
-});

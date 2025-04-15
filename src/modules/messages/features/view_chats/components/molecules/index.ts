@@ -1,3 +1,4 @@
-export {ChatInfo} from './chat_info';
-export {ChatTimeIndicator} from './chat_time_indicator';
-export {Header} from './header';
+export * from './header';
+export * from './chat_info';
+export * from './chat_time_indicator';
+export * from './search_input';
